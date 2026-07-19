@@ -3,9 +3,9 @@ import { useVModel } from '@vueuse/core';
 
 import { cn } from '~/shared/lib';
 
-import type { TextAreaProps } from '../model';
+import type { ITextAreaProps } from '../model';
 
-const props = defineProps<TextAreaProps>();
+const props = defineProps<ITextAreaProps>();
 
 const emits = defineEmits<{
   (e: 'update:modelValue', payload: string | number): void;

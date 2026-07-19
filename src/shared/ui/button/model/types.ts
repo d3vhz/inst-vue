@@ -12,4 +12,4 @@ interface IButtonProps extends PrimitiveProps {
   class?: HTMLAttributes['class'];
 }
 
-export type { IButtonProps };
+export type { IButtonProps, IButtonVariants };

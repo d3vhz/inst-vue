@@ -1,1 +1,1 @@
-export type { TextAreaProps } from './types';
+export type { ITextAreaProps } from './types';
