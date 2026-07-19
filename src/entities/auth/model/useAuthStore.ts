@@ -14,6 +14,9 @@ const useAuthStore = defineStore('auth', {
   },
   getters: {
     isAuthenticated: (state) => Boolean(state.session),
+    user: (state) => ({
+      email: state.session?.user.email,
+    }),
   },
 });
 

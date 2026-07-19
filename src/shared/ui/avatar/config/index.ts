@@ -1,0 +1,1 @@
+export { avatarVariants } from './variants';
