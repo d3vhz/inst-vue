@@ -1,9 +1,9 @@
 import type { HTMLAttributes } from 'vue';
 
-type TextAreaProps = {
+type ITextAreaProps = {
   class?: HTMLAttributes['class'];
   defaultValue?: string | number;
   modelValue?: string | number;
 };
 
-export type { TextAreaProps };
+export type { ITextAreaProps };

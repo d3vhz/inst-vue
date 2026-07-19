@@ -5,4 +5,12 @@ const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
 };
 
-export { cn };
+const parseError = (error: unknown) => {
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return String(error) || 'An unknown error occurred';
+};
+
+export { cn, parseError };
