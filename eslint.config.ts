@@ -9,7 +9,7 @@ import tseslint from 'typescript-eslint';
 
 export default defineConfig([
   {
-    files: ['**/*.{js,mjs,cjs,ts,mts,cts,vue}'],
+    files: ['**/*.{ts,vue}'],
     plugins: { js, perfectionist },
     rules: {
       'perfectionist/sort-imports': [
