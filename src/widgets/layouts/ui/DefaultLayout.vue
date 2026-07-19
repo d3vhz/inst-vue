@@ -1,39 +1,21 @@
 <script setup lang="ts">
-import { RouterLink, useRouter } from 'vue-router';
-import { toast } from 'vue-sonner';
+import { ref } from 'vue';
 
-import { useSignout } from '~/entities/auth';
-import { RouteName } from '~/shared/config';
-import { parseError } from '~/shared/lib';
-import { Button } from '~/shared/ui';
+import { SidebarProvider, SidebarTrigger } from '~/shared/ui';
 
-const router = useRouter();
-const { mutateAsync: signOut } = useSignout();
+import { AppSidebar } from '../../app-sidebar';
 
-const onSignOut = async () => {
-  try {
-    await signOut();
-    toast.success('success');
-    router.push({ name: RouteName.SignIn });
-  } catch (error) {
-    toast.error(parseError(error));
-  }
-};
+const open = ref(true);
 </script>
 
 <template>
-  <div class="flex h-screen flex-col">
-    <header class="flex h-14 items-center px-4 shadow">
-      <nav class="flex w-full items-center justify-between space-x-4">
-        <div class="space-x-4">
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-        </div>
-        <Button @click="onSignOut">Logout</Button>
-      </nav>
-    </header>
-    <main class="flex flex-1 flex-col">
-      <slot></slot>
+  <SidebarProvider :open="open" @update:open="open = $event">
+    <AppSidebar />
+    <main class="flex h-dvh flex-col px-6 py-4">
+      <SidebarTrigger />
+      <div class="flex-1">
+        <slot />
+      </div>
     </main>
-  </div>
+  </SidebarProvider>
 </template>

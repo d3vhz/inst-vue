@@ -4,8 +4,8 @@ import { DefaultLayout } from '~/widgets/layouts';
 
 <template>
   <DefaultLayout>
-    <div class="p-4">
-      <h1>Home</h1>
+    <div class="py-4">
+      <p>Home</p>
     </div>
   </DefaultLayout>
 </template>
