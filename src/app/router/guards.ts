@@ -1,6 +1,6 @@
 import type { NavigationGuard } from 'vue-router';
 
-import { useAuthGuard } from '~/entities/auth';
+import { useAuthGuard } from '~/shared/api/auth';
 import { RouteName } from '~/shared/config';
 import type { IRouteName } from '~/shared/model';
 

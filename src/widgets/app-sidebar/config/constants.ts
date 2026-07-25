@@ -1,15 +1,10 @@
-import { HomeIcon, InboxIcon, PlusIcon } from '@lucide/vue';
+import { HomeIcon, ImagesIcon, InfoIcon, PlusIcon } from '@lucide/vue';
 
 import { RouteName } from '~/shared/config';
 
 import type { IMenuItem, IUserDropdownMenuItem } from '../model';
 
 const menuItems: IMenuItem[] = [
-  {
-    title: 'Create',
-    routeName: RouteName.Home,
-    icon: PlusIcon,
-  },
   {
     title: 'Home',
     routeName: RouteName.Home,
@@ -18,7 +13,17 @@ const menuItems: IMenuItem[] = [
   {
     title: 'About',
     routeName: RouteName.About,
-    icon: InboxIcon,
+    icon: InfoIcon,
+  },
+  {
+    title: 'Feed',
+    routeName: RouteName.PostList,
+    icon: ImagesIcon,
+  },
+  {
+    title: 'Create',
+    routeName: RouteName.PostCreate,
+    icon: PlusIcon,
   },
 ];
 

@@ -1,7 +1,11 @@
-import type { RouteName } from '../config';
+import { z } from 'zod';
+
+import type { RouteName, urlSchema } from '../config';
 
 type Nullable<T> = T | null;
 
 type IRouteName = (typeof RouteName)[keyof typeof RouteName];
 
-export type { Nullable, IRouteName };
+type IUrl = z.infer<typeof urlSchema>;
+
+export type { Nullable, IRouteName, IUrl };

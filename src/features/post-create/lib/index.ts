@@ -1,0 +1,1 @@
+export { uploadMultipleFiles } from './uploadMultipleFiles';

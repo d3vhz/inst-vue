@@ -1,7 +1,7 @@
 import { toTypedSchema } from '@vee-validate/zod';
 import { z } from 'zod';
 
-import { PASSWORD_MAX_CHARACTERS_COUNT } from '~/entities/auth';
+import { PASSWORD_MAX_CHARACTERS_COUNT } from '~/shared/api/auth';
 
 const signInSchema = z.object({
   email: z
