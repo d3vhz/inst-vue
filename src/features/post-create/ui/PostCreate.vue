@@ -1,52 +1,15 @@
 <script setup lang="ts">
-import { useForm } from 'vee-validate';
-import { useRouter } from 'vue-router';
-import { toast } from 'vue-sonner';
-
-import {
-  type IPostCreateSchema,
-  usePostCreate,
-  usePostUpdate,
-} from '~/entities/post';
-import { useAuthStore } from '~/shared/api';
-import { RouteName, toastMessages } from '~/shared/config';
-import { parseError } from '~/shared/lib';
 import { Button, FileUploadField, Form, TextareaField } from '~/shared/ui';
 
-import { initialValues, typedPostCreateSchema } from '../config';
-import { uploadMultipleFiles } from '../lib';
+import { usePostCreateComposable } from '../composables';
 
-const router = useRouter();
-
-const authStore = useAuthStore();
-
-const { handleSubmit, resetForm, isSubmitting } = useForm<IPostCreateSchema>({
-  validationSchema: typedPostCreateSchema,
-  initialValues,
-});
-
-const { mutateAsync: postCreate, isPending: isPostCreatePending } =
-  usePostCreate();
-const { mutateAsync: postUpdate, isPending: isPostUpdatePending } =
-  usePostUpdate();
-
-const onSubmit = handleSubmit(async (data) => {
-  try {
-    const post = await postCreate({ caption: data.caption });
-    const imgUrls = await uploadMultipleFiles({
-      path: `${authStore.user.id}/posts/${post.data.id}`,
-      files: data.images,
-    });
-    await postUpdate({ id: post.data.id, data: { imgUrls } });
-    resetForm();
-    toast.success(toastMessages.post.create);
-    router.push({ name: RouteName.PostList });
-  } catch (error) {
-    toast.error(parseError(error));
-  }
-});
-
-const isPending = isSubmitting || isPostCreatePending || isPostUpdatePending;
+const {
+  CAPTION_MAX_LENGTH,
+  IMAGES_MAX_LENGTH,
+  isDisabled,
+  isBtnDisabled,
+  onSubmit,
+} = usePostCreateComposable();
 </script>
 
 <template>
@@ -57,18 +20,19 @@ const isPending = isSubmitting || isPostCreatePending || isPostUpdatePending;
         name="images"
         label="Images"
         multiple
-        accept="/image/*"
-        description="Select up to 5 images"
-        :disabled="isPending"
+        accept="image/*"
+        :description="`Select up to ${IMAGES_MAX_LENGTH} images`"
+        :disabled="isDisabled"
       />
       <TextareaField
         name="caption"
         label="Caption"
         placeholder="Enter your caption"
         description="Include steps to reproduce, expected behavior, and what actually happened."
-        :disabled="isPending"
+        :max-length="CAPTION_MAX_LENGTH"
+        :disabled="isDisabled"
       />
-      <Button :disabled="isPending" @click="onSubmit">Create Post</Button>
+      <Button :disabled="isBtnDisabled" @click="onSubmit">Create Post</Button>
     </Form>
   </div>
 </template>

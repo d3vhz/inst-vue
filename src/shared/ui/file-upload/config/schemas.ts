@@ -1,11 +1,19 @@
 import { z } from 'zod';
 
+import { BlobUrlSchema } from '~/shared/config';
+
 const FileItemSchema = z.object({
   name: z.string(),
-  size: z.number().nonnegative('Размер должен быть неотрицательным числом'),
+  size: z.number().nonnegative('The size must be a non-negative number.'),
   type: z.string(),
-  uri: z.string().url('Некорректный URI'),
-  file: z.instanceof(File, { message: 'Должен быть объект File' }),
+  blobUrl: BlobUrlSchema,
+  file: z.instanceof(File, { message: 'There must be a File object.' }),
 });
 
-export { FileItemSchema };
+const ImageItemSchema = FileItemSchema.extend({
+  type: z
+    .string()
+    .regex(/^image\//, 'The file type must be an image (image/*)'),
+});
+
+export { FileItemSchema, ImageItemSchema };

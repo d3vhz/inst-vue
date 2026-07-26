@@ -48,7 +48,7 @@ export {
   DropdownMenuPortal,
 } from './dropdown-menu';
 export { InputField, TextareaField, FileUploadField } from './field';
-export { FileItemSchema, type IFileItem } from './file-upload';
+export { FileItemSchema, ImageItemSchema, type IFileItem } from './file-upload';
 export { Form } from './form';
 export { Input } from './input';
 export { ScrollArea, ScrollBar } from './scroll-area';

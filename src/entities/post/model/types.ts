@@ -1,6 +1,6 @@
 import type z from 'zod';
 
-import type { IUrl } from '~/shared/model';
+import type { IBlobUrl } from '~/shared/model';
 
 import type { postCreateSchema, postUpdateSchema } from '../config';
 
@@ -17,7 +17,7 @@ type IPostUpdateSchema = z.infer<typeof postUpdateSchema>;
 type IPostCreate = Pick<IPostCreateSchema, 'caption'>;
 
 type IPostUpdate = Omit<IPostUpdateSchema, 'images'> & {
-  imgUrls: IUrl[];
+  imgUrls: IBlobUrl[];
 };
 
 export type { IPost, IPostCreate, IPostUpdate, IPostCreateSchema };

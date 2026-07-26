@@ -1,14 +1,27 @@
 import { z } from 'zod';
 
-import { FileItemSchema } from '~/shared/ui';
+import { ImageItemSchema } from '~/shared/ui';
 
-import { CAPTION_MIN_LENGTH, STATUS } from './constants';
+import {
+  CAPTION_MAX_LENGTH,
+  CAPTION_MIN_LENGTH,
+  IMAGES_MAX_LENGTH,
+  IMAGES_MIN_LENGTH,
+  STATUS,
+} from './constants';
 
-const imagesSchema = z.array(FileItemSchema).max(5, 'Select up to files');
+const imagesSchema = z
+  .array(ImageItemSchema)
+  .min(IMAGES_MIN_LENGTH, `Select at least ${IMAGES_MIN_LENGTH} file`)
+  .max(IMAGES_MAX_LENGTH, `Select up to ${IMAGES_MAX_LENGTH} files`);
 const statusSchema = z.enum(STATUS);
 const captionSchema = z
   .string()
-  .min(CAPTION_MIN_LENGTH, { message: 'Email is required' });
+  .min(CAPTION_MIN_LENGTH, { message: 'Caption is required' })
+  .max(CAPTION_MAX_LENGTH, {
+    message: `Caption must not exceed ${CAPTION_MAX_LENGTH} characters`,
+  })
+  .transform((val) => val.trim());
 
 const postCreateSchema = z.object({
   images: imagesSchema,

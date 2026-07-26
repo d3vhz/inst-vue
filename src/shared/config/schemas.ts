@@ -1,5 +1,8 @@
 import { z } from 'zod';
 
-const urlSchema = z.string().url();
+const BlobUrlSchema = z
+  .string()
+  .url('Must be a valid URL')
+  .min(1, 'URL cannot be empty');
 
-export { urlSchema };
+export { BlobUrlSchema };
