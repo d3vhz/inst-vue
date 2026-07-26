@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useField } from 'vee-validate';
 
+import { cn } from '~/shared/lib';
+
 import {
   InputGroup,
   InputGroupAddon,
@@ -30,7 +32,13 @@ const { value, errorMessage } = useField<string>(props.name);
         :rows="$attrs.rows || 4"
       />
       <InputGroupAddon align="block-end">
-        <InputGroupText class="tabular-nums">
+        <InputGroupText
+          :class="
+            cn('tabular-nums', {
+              'text-destructive': (value?.length || 0) > props.maxLength,
+            })
+          "
+        >
           {{ value?.length || 0 }}/{{ props.maxLength }} characters
         </InputGroupText>
       </InputGroupAddon>

@@ -33,13 +33,13 @@ const onRemoveFile = (index: number) => {
   const file = files.value[index];
   if (!file) return;
 
-  URL.revokeObjectURL(file.uri);
+  URL.revokeObjectURL(file.blobUrl);
   files.value.splice(index, 1);
   emit('change', files.value);
 };
 
 const clearFiles = () => {
-  files.value.forEach((file) => URL.revokeObjectURL(file.uri));
+  files.value.forEach((file) => URL.revokeObjectURL(file.blobUrl));
   files.value = [];
   emit('change', files.value);
 };
@@ -47,12 +47,12 @@ const clearFiles = () => {
 const onChangeFiles = (event: Event) => {
   const target = event.target as HTMLInputElement;
   const fileList: Nullable<FileList> = target.files;
-  files.value.forEach((file) => URL.revokeObjectURL(file.uri));
+  files.value.forEach((file) => URL.revokeObjectURL(file.blobUrl));
   files.value = Array.from(fileList ?? []).map((file) => ({
     name: file.name,
     size: file.size,
     type: file.type,
-    uri: URL.createObjectURL(file),
+    blobUrl: URL.createObjectURL(file),
     file,
   }));
   emit('change', files.value);
@@ -72,13 +72,13 @@ const onChangeFiles = (event: Event) => {
     <Carousel class="select-none">
       <CarouselContent class="-ml-1">
         <CarouselItem
-          v-for="({ name, size, uri }, index) in files"
+          v-for="({ name, size, blobUrl }, index) in files"
           :key="name"
           class="basis-1/2"
         >
           <Attachment orientation="vertical" class="w-full!">
             <AttachmentMedia variant="image">
-              <img :src="uri" :alt="name" />
+              <img :src="blobUrl" :alt="name" />
             </AttachmentMedia>
             <AttachmentContent>
               <AttachmentTitle>{{ name }}</AttachmentTitle>

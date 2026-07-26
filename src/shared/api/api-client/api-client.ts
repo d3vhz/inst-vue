@@ -46,8 +46,9 @@ const api = {
       const response = await fetch(fullUrl, config);
       clearTimeout(timeoutId);
 
-      if (response.status === 401) {
-        throw new Error('Unauthorized');
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error((error as Error).message);
       }
 
       const data: R = await response.json();

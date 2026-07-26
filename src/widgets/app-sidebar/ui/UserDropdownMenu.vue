@@ -57,7 +57,7 @@ const onSignOut = async () => {
     <DropdownMenuContent
       side="top"
       class="w-(--reka-popper-anchor-width)"
-      :side-offset="20"
+      :side-offset="8"
     >
       <DropdownMenuItem
         v-for="{ title, routeName, disabled } in userDropdownItems"
