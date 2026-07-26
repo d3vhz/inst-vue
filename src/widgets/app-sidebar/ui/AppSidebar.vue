@@ -13,7 +13,7 @@ import {
   SidebarMenuItem,
 } from '~/shared/ui';
 
-import { menuItems } from '../config/index.ts';
+import { menuItems } from '../config';
 
 import UserDropdownMenu from './UserDropdownMenu.vue';
 </script>

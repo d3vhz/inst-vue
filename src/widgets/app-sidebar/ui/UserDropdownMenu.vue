@@ -3,8 +3,8 @@ import { ChevronsUpDownIcon } from '@lucide/vue';
 import { useRouter } from 'vue-router';
 import { toast } from 'vue-sonner';
 
-import { useAuthStore, useSignout } from '~/entities/auth';
-import { RouteName } from '~/shared/config';
+import { useAuthStore, useSignout } from '~/shared/api';
+import { RouteName, toastMessages } from '~/shared/config';
 import { parseError } from '~/shared/lib';
 import {
   Avatar,
@@ -25,7 +25,7 @@ const authStore = useAuthStore();
 const onSignOut = async () => {
   try {
     await signOut();
-    toast.success('success');
+    toast.success(toastMessages.auth.signOut);
     router.push({ name: RouteName.SignIn });
   } catch (error) {
     toast.error(parseError(error));

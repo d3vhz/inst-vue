@@ -1,5 +1,35 @@
+export {
+  Attachment,
+  AttachmentAction,
+  AttachmentActions,
+  AttachmentContent,
+  AttachmentDescription,
+  AttachmentGroup,
+  AttachmentMedia,
+  AttachmentTitle,
+  AttachmentTrigger,
+} from './attachment';
 export { Avatar, AvatarFallback, AvatarImage } from './avatar';
+export {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from './breadcrumb';
+
 export { Button } from './button';
+export {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  useCarousel,
+  type CarouselApi,
+} from './carousel';
 export {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -17,8 +47,11 @@ export {
   DropdownMenuTrigger,
   DropdownMenuPortal,
 } from './dropdown-menu';
+export { InputField, TextareaField, FileUploadField } from './field';
+export { FileItemSchema, type IFileItem } from './file-upload';
+export { Form } from './form';
 export { Input } from './input';
-export { InputField } from './input-field';
+export { ScrollArea, ScrollBar } from './scroll-area';
 export {
   Sidebar,
   SidebarContent,
@@ -45,4 +78,5 @@ export {
   SidebarTrigger,
 } from './sidebar';
 export { Toaster } from './sonner';
+export { Spinner } from './spinner';
 export { Textarea } from './textarea';

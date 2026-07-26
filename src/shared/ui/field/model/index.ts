@@ -1,1 +1,5 @@
-export type { IFieldVariants } from './types';
+export type {
+  IFieldVariants,
+  IInputFieldProps,
+  ITextareaFieldProps,
+} from './types';
