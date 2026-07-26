@@ -1,16 +1,18 @@
 import { api, storageApi } from '~/shared/api';
 import type { IFileItem } from '~/shared/ui';
 
-import type { IPost, IPostCreate, IPostUpdate } from '../model';
+import type {
+  IGetPostListParams,
+  IPost,
+  IPostCreate,
+  IPostUpdate,
+} from '../model';
 
 const postApi = {
-  getPostList() {
+  getPostList(params?: IGetPostListParams) {
     return api.get<{ posts: IPost[]; total: number }>({
       url: '/posts',
-      params: {
-        page: '1',
-        limit: '20',
-      },
+      params,
     });
   },
   create(data: IPostCreate) {

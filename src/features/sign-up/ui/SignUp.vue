@@ -68,7 +68,9 @@ const isSignUpPending = isSubmitting || isPending;
       <Button :disabled="isSignUpPending" @click="onSubmit">Sign up</Button>
       <div class="space-x-2">
         <small>Already have an account?</small>
-        <RouterLink to="/sign-in" class="text-primary">Sign in</RouterLink>
+        <RouterLink :to="{ name: RouteName.SignIn }" class="text-primary">
+          Sign in
+        </RouterLink>
       </div>
     </Form>
   </div>

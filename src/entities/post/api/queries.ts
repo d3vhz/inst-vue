@@ -1,13 +1,15 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query';
+import { type ComputedRef } from 'vue';
 
 import { queryKeys } from '../config';
+import type { IGetPostListParams } from '../model';
 
 import { postApi } from './api';
 
-const useGetPostList = () => {
+const useGetPostList = (params?: ComputedRef<IGetPostListParams>) => {
   return useQuery({
-    queryFn: postApi.getPostList,
-    queryKey: queryKeys.all,
+    queryFn: () => postApi.getPostList(params?.value),
+    queryKey: [queryKeys.all, params],
   });
 };
 

@@ -6,7 +6,7 @@ import { toast } from 'vue-sonner';
 import {
   CAPTION_MAX_LENGTH,
   IMAGES_MAX_LENGTH,
-  type IPostCreateSchema,
+  type IPostCreateFormData,
   usePostCreate,
   usePostUpdate,
 } from '~/entities/post';
@@ -23,7 +23,7 @@ export function usePostCreateComposable() {
   const authStore = useAuthStore();
 
   const { handleSubmit, resetForm, isSubmitting, meta } =
-    useForm<IPostCreateSchema>({
+    useForm<IPostCreateFormData>({
       validationSchema: typedPostCreateSchema,
       initialValues,
     });

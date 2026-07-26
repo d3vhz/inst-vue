@@ -6,4 +6,5 @@ export {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  CarouselActions,
 } from './ui';

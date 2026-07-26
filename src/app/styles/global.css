@@ -172,6 +172,10 @@
     opacity: 0;
   }
 
+  a {
+    @apply hover:underline underline-offset-4 transition-all;
+  }
+
   h1 {
     @apply scroll-m-20 text-4xl font-extrabold tracking-tight text-balance;
   }

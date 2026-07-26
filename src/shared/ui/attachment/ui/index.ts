@@ -7,3 +7,4 @@ export { default as AttachmentGroup } from './AttachmentGroup.vue';
 export { default as AttachmentMedia } from './AttachmentMedia.vue';
 export { default as AttachmentTitle } from './AttachmentTitle.vue';
 export { default as AttachmentTrigger } from './AttachmentTrigger.vue';
+export { default as AttachmentWrap } from './AttachmentWrap.vue';

@@ -10,6 +10,7 @@ const props = defineProps<{
 
 <template>
   <p
+    v-if="$slots.default"
     data-slot="field-description"
     :class="
       cn(
