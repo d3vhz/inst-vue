@@ -5,4 +5,10 @@ export type {
   ITextareaFieldProps,
   ISelectFieldProps,
 } from './model';
-export { InputField, TextareaField, FileUploadField, SelectField } from './ui';
+export {
+  InputField,
+  TextareaField,
+  FileUploadField,
+  SelectField,
+  ImgUrlsField,
+} from './ui';

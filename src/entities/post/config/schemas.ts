@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { UrlSchema } from '~/shared/config';
 import { ImageItemSchema } from '~/shared/ui';
 
 import {
@@ -12,6 +13,10 @@ import {
 
 const imagesSchema = z
   .array(ImageItemSchema)
+  .min(IMAGES_MIN_LENGTH, `Select at least ${IMAGES_MIN_LENGTH} file`)
+  .max(IMAGES_MAX_LENGTH, `Select up to ${IMAGES_MAX_LENGTH} files`);
+const imgUrlsSchema = z
+  .array(UrlSchema)
   .min(IMAGES_MIN_LENGTH, `Select at least ${IMAGES_MIN_LENGTH} file`)
   .max(IMAGES_MAX_LENGTH, `Select up to ${IMAGES_MAX_LENGTH} files`);
 const statusSchema = z.enum(STATUSES);
@@ -28,10 +33,10 @@ const postCreateSchema = z.object({
   caption: captionSchema,
 });
 
-const postUpdateSchema = z.object({
-  images: imagesSchema.optional(),
+const postEditSchema = z.object({
+  imgUrls: imgUrlsSchema,
   status: statusSchema.optional(),
   caption: captionSchema.optional(),
 });
 
-export { postCreateSchema, postUpdateSchema, statusSchema };
+export { postCreateSchema, postEditSchema, statusSchema };

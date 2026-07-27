@@ -1,8 +1,7 @@
 import { z } from 'zod';
 
-const BlobUrlSchema = z
-  .string()
-  .url('Must be a valid URL')
-  .min(1, 'URL cannot be empty');
+const BlobUrlSchema = z.string().url('Must be a valid URL');
 
-export { BlobUrlSchema };
+const UrlSchema = z.string().url('Must be a valid URL');
+
+export { UrlSchema, BlobUrlSchema };

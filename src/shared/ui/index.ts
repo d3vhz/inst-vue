@@ -58,10 +58,23 @@ export {
   DropdownMenuTrigger,
   DropdownMenuPortal,
 } from './dropdown-menu';
-export { InputField, TextareaField, FileUploadField } from './field';
+export {
+  InputField,
+  TextareaField,
+  SelectField,
+  FileUploadField,
+  ImgUrlsField,
+} from './field';
 export { FileItemSchema, ImageItemSchema, type IFileItem } from './file-upload';
 export { Form } from './form';
 export { Input } from './input';
+export {
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+  PopoverTrigger,
+  PopoverClose,
+} from './popover';
 export {
   QueryFilter,
   type IQueryFilterProps,

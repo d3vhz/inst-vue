@@ -21,6 +21,10 @@
   --muted-foreground: oklch(55.6% 0 0);
   --accent: oklch(97% 0 0);
   --accent-foreground: oklch(20.5% 0 0);
+  --positive: oklch(0.696 0.17 162.48);
+  --positive-foreground: oklch(97% 0.01 17);
+  --amber: oklch(0.84 0.17 84.92);
+  --amber-foreground: oklch(97% 0.01 17);
   --destructive: oklch(57.7% 0.245 27.325);
   --destructive-foreground: oklch(97% 0.01 17);
   --border: oklch(92.2% 0 0);
@@ -102,6 +106,10 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-positive: var(--positive);
+  --color-positive-foreground: var(--positive-foreground);
+  --color-amber: var(--amber);
+  --color-amber-foreground: var(--amber-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);

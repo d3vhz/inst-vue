@@ -9,5 +9,5 @@ export {
   useAuthGuard,
   useAuthStore,
 } from './auth';
-export { storageApi } from './storage';
+export { storageApi, formatPath } from './storage';
 export { supabaseClient, SUPABASE_BUCKET_ID } from './supabase-client';

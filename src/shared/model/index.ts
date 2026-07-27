@@ -1,1 +1,1 @@
-export type { Nullable, IRouteName, IBlobUrl } from './types';
+export type { Nullable, IRouteName, IUrl, IBlobUrl } from './types';

@@ -11,6 +11,9 @@ interface IFieldBaseProps {
   label: string;
   name: string;
   description?: string;
+}
+
+interface IFieldWrapProps extends IFieldBaseProps {
   errorMessage?: string;
 }
 
@@ -23,6 +26,7 @@ interface ITextareaFieldProps extends ITextAreaProps, IFieldBaseProps {
 interface ISelectFieldProps extends ISelectProps, IFieldBaseProps {}
 
 export type {
+  IFieldWrapProps,
   IFieldBaseProps,
   IFieldVariants,
   IInputFieldProps,

@@ -1,4 +1,5 @@
 export type {
+  IFieldWrapProps,
   IFieldBaseProps,
   IFieldVariants,
   IInputFieldProps,

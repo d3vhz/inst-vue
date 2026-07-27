@@ -7,4 +7,4 @@ export {
   IMAGES_MIN_LENGTH,
   IMAGES_MAX_LENGTH,
 } from './constants';
-export { postCreateSchema, postUpdateSchema, statusSchema } from './schemas';
+export { postCreateSchema, postEditSchema, statusSchema } from './schemas';

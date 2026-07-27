@@ -1,3 +1,3 @@
 export { RouteName } from './constants';
-export { BlobUrlSchema } from './schemas';
+export { UrlSchema, BlobUrlSchema } from './schemas';
 export { toastMessages } from './toastMessages';

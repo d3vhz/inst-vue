@@ -1,7 +1,14 @@
-export { useGetPostList, usePostCreate, usePostUpdate, postApi } from './api';
+export {
+  useGetPost,
+  useGetPostList,
+  usePostCreate,
+  usePostUpdate,
+  usePostDelete,
+  postApi,
+} from './api';
 export {
   postCreateSchema,
-  postUpdateSchema,
+  postEditSchema,
   queryKeys,
   statusItems,
   CAPTION_MIN_LENGTH,
@@ -12,7 +19,8 @@ export {
 export type {
   IPost,
   IPostCreate,
-  IPostUpdate,
+  IPostEdit,
   IPostCreateFormData,
+  IPostEditFormData,
   IGetPostListParams,
 } from './model';

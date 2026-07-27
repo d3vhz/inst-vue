@@ -1,3 +1,5 @@
+import { isNotNil } from 'es-toolkit/predicate';
+
 import { useAuthStore } from '../auth';
 
 import { BASE_URL, DEFAULT_TIMEOUT } from './config';
@@ -26,6 +28,7 @@ const api = {
     options = {},
     timeout = DEFAULT_TIMEOUT,
   }: IRequestParams): Promise<IApiResponse<R>> {
+    const hasBody = isNotNil(options.body);
     const fullUrl = params
       ? `${BASE_URL}${buildUrlWithParams(url, params)}`
       : `${BASE_URL}${url}`;
@@ -36,7 +39,7 @@ const api = {
       ...options,
       signal: controller.signal,
       headers: {
-        'Content-Type': 'application/json',
+        ...(hasBody && { 'Content-Type': 'application/json' }),
         ...this.getAuthHeaders(),
         ...options.headers,
       },

@@ -1,31 +1,44 @@
-import { api, storageApi } from '~/shared/api';
+import { api, formatPath, storageApi } from '~/shared/api';
 import type { IFileItem } from '~/shared/ui';
 
 import type {
   IGetPostListParams,
   IPost,
   IPostCreate,
-  IPostUpdate,
+  IPostEdit,
 } from '../model';
 
 const postApi = {
+  getPost(postId: string) {
+    return api.get<IPost>({
+      url: `/posts/${postId}`,
+    });
+  },
   getPostList(params?: IGetPostListParams) {
     return api.get<{ posts: IPost[]; total: number }>({
       url: '/posts',
       params,
     });
   },
-  create(data: IPostCreate) {
+  createPost(data: IPostCreate) {
     return api.post<IPostCreate, IPost>({
       url: '/posts',
       data,
     });
   },
-  update({ id, data }: { id: string; data: IPostUpdate }) {
-    return api.patch<IPostUpdate, IPost>({
+  updatePost({ id, data }: { id: string; data: IPostEdit }) {
+    return api.patch<IPostEdit, IPost>({
       url: `/posts/${id}`,
       data,
     });
+  },
+  deletePost(postId: string) {
+    return api.delete<IPost>({
+      url: `/posts/${postId}`,
+    });
+  },
+  deleteFiles(paths: string[]) {
+    return storageApi.deleteFiles(paths.map((url) => formatPath(url)));
   },
   async uploadFile({ path, file }: { path: string; file: IFileItem }) {
     try {
