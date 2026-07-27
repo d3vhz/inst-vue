@@ -107,6 +107,7 @@ export function usePostEditComposable() {
   const error = getPostError;
 
   return {
+    post,
     CAPTION_MAX_LENGTH,
     IMAGES_MAX_LENGTH,
     isPending,

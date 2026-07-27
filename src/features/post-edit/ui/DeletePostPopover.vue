@@ -15,7 +15,7 @@ const emit = defineEmits<{ (event: 'delete-post'): void }>();
     <PopoverTrigger>
       <slot />
     </PopoverTrigger>
-    <PopoverContent size="top" :side-offset="10">
+    <PopoverContent :side-offset="10">
       <div class="space-y-4">
         <div>
           <small>Are you sure you want to delete this post?</small>
@@ -25,7 +25,13 @@ const emit = defineEmits<{ (event: 'delete-post'): void }>();
             <Button size="xs" variant="secondary">Cancel</Button>
           </PopoverClose>
           <PopoverClose as-child>
-            <Button size="xs" @click="emit('delete-post')">Ok</Button>
+            <Button
+              size="xs"
+              variant="destructive"
+              @click="emit('delete-post')"
+            >
+              Ok
+            </Button>
           </PopoverClose>
         </div>
       </div>
