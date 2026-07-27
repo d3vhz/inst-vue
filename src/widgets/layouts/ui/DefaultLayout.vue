@@ -4,7 +4,7 @@ import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { RouteName } from '~/shared/config';
-import { SidebarProvider, SidebarTrigger } from '~/shared/ui';
+import { SidebarProvider, SidebarTrigger, ThemeSwitcher } from '~/shared/ui';
 
 import { AppBreadcrumbs, type IBreadcrumb } from '../../app-breadcrumbs';
 import { AppSidebar } from '../../app-sidebar';
@@ -29,9 +29,12 @@ const breadcrumbs = computed(() => {
   <SidebarProvider :open="open" @update:open="open = $event">
     <AppSidebar />
     <main class="flex h-dvh w-full flex-col px-6 py-4">
-      <div class="flex items-center gap-4">
-        <SidebarTrigger />
-        <AppBreadcrumbs v-if="breadcrumbs.length" :items="breadcrumbs" />
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <SidebarTrigger />
+          <AppBreadcrumbs v-if="breadcrumbs.length" :items="breadcrumbs" />
+        </div>
+        <ThemeSwitcher variant="ghost" size="icon-sm" />
       </div>
       <div class="flex-1">
         <slot />

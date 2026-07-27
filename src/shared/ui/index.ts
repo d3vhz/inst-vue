@@ -97,3 +97,4 @@ export {
 export { Toaster } from './sonner';
 export { Spinner } from './spinner';
 export { Textarea } from './textarea';
+export { ThemeSwitcher, useTheme } from './theme-switcher';

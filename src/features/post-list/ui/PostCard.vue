@@ -49,7 +49,7 @@ defineProps<{ post: IPost }>();
             params: { id: post.id },
           }"
         >
-          <Button size="sm" variant="text">Edit</Button>
+          <Button size="sm" variant="link">Edit</Button>
         </RouterLink>
       </div>
     </Carousel>
