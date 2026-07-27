@@ -5,16 +5,19 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/80',
+        default:
+          'bg-primary/20 text-primary hover:bg-primary/80 hover:text-primary-foreground',
         secondary:
-          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+          'bg-secondary/20 text-secondary hover:bg-secondary/80 hover:text-secondary-foreground',
         'secondary-text': 'text-secondary hover:text-secondary/90',
-        positive: 'bg-positive text-positive-foreground hover:bg-positive/80',
+        positive:
+          'bg-positive/20 text-positive hover:bg-positive/80 hover:text-positive-foreground',
         'positive-text': 'text-positive hover:bg-positive/20',
-        amber: 'bg-amber text-amber-foreground hover:bg-amber/80',
+        amber:
+          'bg-amber/20 text-amber hover:bg-amber/80 hover:text-amber-foreground',
         'amber-text': 'text-amber hover:bg-amber/20',
         destructive:
-          'bg-destructive text-destructive-foreground hover:bg-destructive/80',
+          'bg-destructive/20 text-destructive hover:bg-destructive/80 hover:text-destructive-foreground',
         'destructive-text': 'text-destructive hover:bg-destructive/20',
         ghost:
           'hover:bg-primary/80 hover:text-primary-foreground data-[active="true"]:not-hover:bg-secondary data-[active="true"]:not-hover:text-secondary-foreground',

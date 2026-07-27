@@ -45,11 +45,11 @@ defineProps<{ post: IPost }>();
         </p>
         <RouterLink
           :to="{
-            name: RouteName.PostEdit,
+            name: RouteName.PostShow,
             params: { id: post.id },
           }"
         >
-          <Button size="sm" variant="link">Edit</Button>
+          <Button size="sm" variant="link">Show</Button>
         </RouterLink>
       </div>
     </Carousel>

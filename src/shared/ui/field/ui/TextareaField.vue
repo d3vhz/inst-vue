@@ -33,7 +33,6 @@ const { value, errorMessage } = useField<string>(props.name);
         v-model="value"
         v-bind="$attrs"
         :placeholder="$attrs.placeholder"
-        :rows="$attrs.rows || 4"
       />
       <InputGroupAddon align="block-end">
         <InputGroupText

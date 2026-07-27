@@ -1,6 +1,8 @@
-import type { HTMLAttributes } from 'vue';
+import type { HTMLAttributes, TextareaHTMLAttributes } from 'vue';
 
-type ITextAreaProps = {
+type ITextareaBaseProps = Pick<TextareaHTMLAttributes, 'rows'>;
+
+type ITextAreaProps = ITextareaBaseProps & {
   class?: HTMLAttributes['class'];
   defaultValue?: string | number;
   modelValue?: string | number;

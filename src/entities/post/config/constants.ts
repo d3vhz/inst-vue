@@ -8,7 +8,7 @@ const queryKeys = {
 const STATUSES = ['active', 'archived'] as const;
 
 const CAPTION_MIN_LENGTH = 1;
-const CAPTION_MAX_LENGTH = 200;
+const CAPTION_MAX_LENGTH = 500;
 
 const IMAGES_MIN_LENGTH = 1;
 const IMAGES_MAX_LENGTH = 5;
