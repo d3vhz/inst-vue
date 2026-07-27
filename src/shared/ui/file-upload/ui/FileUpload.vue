@@ -65,7 +65,7 @@ const onChangeFiles = (event: Event) => {
     <Button
       :disabled="$attrs.disabled"
       size="xs"
-      variant="outline"
+      variant="secondary"
       @click="clearFiles"
     >
       Clear all

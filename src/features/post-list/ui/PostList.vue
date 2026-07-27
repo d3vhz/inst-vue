@@ -8,15 +8,15 @@ import { filters } from '../config';
 
 import PostCard from './PostCard.vue';
 
+const { resetAllFilters, queryParams } = useQueryFilters();
+
+const { data, isPending, isError, error } = useGetPostList(
+  queryParams as ComputedRef<IGetPostListParams>
+);
+
 const postList = computed(() => {
   return data.value?.data?.posts ?? [];
 });
-
-const { resetAllFilters, queryParams } = useQueryFilters();
-
-const { isPending, isError, data, error } = useGetPostList(
-  queryParams as ComputedRef<IGetPostListParams>
-);
 </script>
 
 <template>

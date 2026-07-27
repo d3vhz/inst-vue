@@ -10,6 +10,7 @@ export { default as FieldSet } from './FieldSet.vue';
 export { default as FieldTitle } from './FieldTitle.vue';
 export { default as FieldWrap } from './FieldWrap.vue';
 export { default as FileUploadField } from './FileUploadField.vue';
+export { default as ImgUrlsField } from './ImgUrlsField.vue';
 export { default as InputField } from './InputField.vue';
 export { default as SelectField } from './SelectField.vue';
 export { default as TextareaField } from './TextareaField.vue';

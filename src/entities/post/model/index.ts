@@ -1,7 +1,8 @@
 export type {
   IPost,
   IPostCreate,
-  IPostUpdate,
+  IPostEdit,
   IPostCreateFormData,
+  IPostEditFormData,
   IGetPostListParams,
 } from './types';

@@ -1,7 +1,7 @@
 import { SUPABASE_BUCKET_ID, supabaseClient } from '../../supabase-client';
 
 const storageApi = {
-  async deleteFile(paths: string[]) {
+  async deleteFiles(paths: string[]) {
     const { error } = await supabaseClient.storage
       .from(SUPABASE_BUCKET_ID)
       .remove(paths);

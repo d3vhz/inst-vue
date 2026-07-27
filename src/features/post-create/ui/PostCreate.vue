@@ -8,7 +8,7 @@ const {
   IMAGES_MAX_LENGTH,
   isDisabled,
   isBtnDisabled,
-  onSubmit,
+  onCreatePost,
 } = usePostCreateComposable();
 </script>
 
@@ -32,7 +32,9 @@ const {
         :max-length="CAPTION_MAX_LENGTH"
         :disabled="isDisabled"
       />
-      <Button :disabled="isBtnDisabled" @click="onSubmit">Create Post</Button>
+      <Button :disabled="isBtnDisabled" @click="onCreatePost">
+        Create Post
+      </Button>
     </Form>
   </div>
 </template>

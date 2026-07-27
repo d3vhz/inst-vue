@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { IFieldBaseProps } from '../model';
+import type { IFieldWrapProps } from '../model';
 
 import { Field, FieldDescription, FieldError, FieldLabel } from './index';
 
-defineProps<IFieldBaseProps>();
+defineProps<IFieldWrapProps>();
 </script>
 
 <template>

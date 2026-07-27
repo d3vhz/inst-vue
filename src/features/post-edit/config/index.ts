@@ -1,0 +1,1 @@
+export { typedPostEditSchema } from './schemas';

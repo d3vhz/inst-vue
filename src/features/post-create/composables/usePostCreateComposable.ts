@@ -33,7 +33,7 @@ export function usePostCreateComposable() {
   const { mutateAsync: postUpdate, isPending: isPostUpdatePending } =
     usePostUpdate();
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onCreatePost = handleSubmit(async (data) => {
     try {
       const post = await postCreate({ caption: data.caption });
       const imgUrls = await uploadMultipleFiles({
@@ -57,6 +57,6 @@ export function usePostCreateComposable() {
     IMAGES_MAX_LENGTH,
     isDisabled,
     isBtnDisabled,
-    onSubmit,
+    onCreatePost,
   };
 }

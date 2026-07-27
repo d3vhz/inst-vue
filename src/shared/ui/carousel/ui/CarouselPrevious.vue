@@ -15,7 +15,7 @@ const props = withDefaults(
     } & WithClassAsProps
   >(),
   {
-    variant: 'outline',
+    variant: 'secondary',
     size: 'icon',
   }
 );

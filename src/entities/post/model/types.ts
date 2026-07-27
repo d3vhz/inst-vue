@@ -1,12 +1,6 @@
 import type z from 'zod';
 
-import type { IBlobUrl } from '~/shared/model';
-
-import type {
-  postCreateSchema,
-  postUpdateSchema,
-  statusSchema,
-} from '../config';
+import type { postCreateSchema, postEditSchema, statusSchema } from '../config';
 
 type IPost = {
   id: string;
@@ -18,13 +12,11 @@ type IPost = {
 
 type IPostStatus = z.infer<typeof statusSchema>;
 type IPostCreateFormData = z.infer<typeof postCreateSchema>;
-type IPostUpdateFormData = z.infer<typeof postUpdateSchema>;
+type IPostEditFormData = z.infer<typeof postEditSchema>;
 
 type IPostCreate = Pick<IPostCreateFormData, 'caption'>;
 
-type IPostUpdate = Omit<IPostUpdateFormData, 'images'> & {
-  imgUrls: IBlobUrl[];
-};
+type IPostEdit = IPostEditFormData;
 
 type IGetPostListParams = {
   search: string;
@@ -36,7 +28,8 @@ type IGetPostListParams = {
 export type {
   IPost,
   IPostCreate,
-  IPostUpdate,
+  IPostEdit,
   IPostCreateFormData,
+  IPostEditFormData,
   IGetPostListParams,
 };

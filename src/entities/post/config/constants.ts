@@ -2,6 +2,7 @@ import { pascalCase } from 'es-toolkit/string';
 
 const queryKeys = {
   all: ['posts'],
+  post: (id: string) => ['post', id],
 };
 
 const STATUSES = ['active', 'archived'] as const;
