@@ -11,7 +11,7 @@ import {
 } from '../../input-group';
 import type { IInputFieldProps } from '../model';
 
-import { Field, FieldDescription, FieldError, FieldLabel } from './index';
+import { FieldWrap } from './index';
 
 const props = defineProps<IInputFieldProps>();
 
@@ -20,11 +20,15 @@ const showPassword = ref(false);
 </script>
 
 <template>
-  <Field>
-    <FieldLabel :for="props.name">{{ props.label }}</FieldLabel>
+  <FieldWrap
+    :name="name"
+    :label="label"
+    :description="description"
+    :error-message="errorMessage"
+  >
     <InputGroup class="rounded-full">
       <InputGroupInput
-        :id="props.name"
+        :id="name"
         v-model="value"
         v-bind="$attrs"
         :placeholder="$attrs.placeholder"
@@ -39,9 +43,5 @@ const showPassword = ref(false);
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>
-    <FieldDescription v-if="props.description">
-      {{ props.description }}
-    </FieldDescription>
-    <FieldError>{{ errorMessage }}</FieldError>
-  </Field>
+  </FieldWrap>
 </template>

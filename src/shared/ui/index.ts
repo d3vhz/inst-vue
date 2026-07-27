@@ -1,4 +1,5 @@
 export {
+  AttachmentWrap,
   Attachment,
   AttachmentAction,
   AttachmentActions,
@@ -10,6 +11,7 @@ export {
   AttachmentTrigger,
 } from './attachment';
 export { Avatar, AvatarFallback, AvatarImage } from './avatar';
+export { Badge } from './badge';
 export {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -19,10 +21,19 @@ export {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from './breadcrumb';
-
 export { Button } from './button';
 export {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from './card';
+export {
   Carousel,
+  CarouselActions,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -51,6 +62,12 @@ export { InputField, TextareaField, FileUploadField } from './field';
 export { FileItemSchema, ImageItemSchema, type IFileItem } from './file-upload';
 export { Form } from './form';
 export { Input } from './input';
+export {
+  QueryFilter,
+  type IQueryFilterProps,
+  QUERY_FILTER_TYPE,
+  useQueryFilters,
+} from './query-filter';
 export { ScrollArea, ScrollBar } from './scroll-area';
 export {
   Sidebar,

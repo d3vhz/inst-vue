@@ -2,22 +2,22 @@
 import { useField } from 'vee-validate';
 
 import { FileUpload, type IFileItem } from '../../file-upload';
-import type { IInputFieldProps } from '../model';
+import type { IFieldBaseProps } from '../model';
 
-import { Field, FieldDescription, FieldError, FieldLabel } from './index';
+import { FieldWrap } from './index';
 
-const props = defineProps<IInputFieldProps>();
+const props = defineProps<IFieldBaseProps>();
 
 const { errorMessage, setValue } = useField<IFileItem[]>(props.name);
 </script>
 
 <template>
-  <Field>
-    <FieldLabel :for="props.name">{{ props.label }}</FieldLabel>
+  <FieldWrap
+    :name="name"
+    :label="label"
+    :description="description"
+    :error-message="errorMessage"
+  >
     <FileUpload v-bind="$attrs" @change="setValue" />
-    <FieldDescription v-if="props.description">
-      {{ props.description }}
-    </FieldDescription>
-    <FieldError>{{ errorMessage }}</FieldError>
-  </Field>
+  </FieldWrap>
 </template>

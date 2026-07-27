@@ -11,7 +11,7 @@ import {
 } from '../../input-group';
 import type { ITextareaFieldProps } from '../model';
 
-import { Field, FieldDescription, FieldError, FieldLabel } from './index';
+import { FieldWrap } from './index';
 
 const props = withDefaults(defineProps<ITextareaFieldProps>(), {
   maxLength: 100,
@@ -21,11 +21,15 @@ const { value, errorMessage } = useField<string>(props.name);
 </script>
 
 <template>
-  <Field>
-    <FieldLabel :for="props.name">{{ props.label }}</FieldLabel>
+  <FieldWrap
+    :name="name"
+    :label="label"
+    :description="description"
+    :error-message="errorMessage"
+  >
     <InputGroup>
       <InputGroupTextarea
-        :id="props.name"
+        :id="name"
         v-model="value"
         v-bind="$attrs"
         :placeholder="$attrs.placeholder"
@@ -35,17 +39,13 @@ const { value, errorMessage } = useField<string>(props.name);
         <InputGroupText
           :class="
             cn('tabular-nums', {
-              'text-destructive': (value?.length || 0) > props.maxLength,
+              'text-destructive': (value?.length || 0) > maxLength,
             })
           "
         >
-          {{ value?.length || 0 }}/{{ props.maxLength }} characters
+          {{ value?.length || 0 }}/{{ maxLength }} characters
         </InputGroupText>
       </InputGroupAddon>
     </InputGroup>
-    <FieldDescription v-if="props.description">
-      {{ props.description }}
-    </FieldDescription>
-    <FieldError>{{ errorMessage }}</FieldError>
-  </Field>
+  </FieldWrap>
 </template>

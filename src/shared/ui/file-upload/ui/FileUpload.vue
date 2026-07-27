@@ -16,14 +16,15 @@ import {
 import { Button } from '../../button';
 import {
   Carousel,
+  CarouselActions,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from '../../carousel';
 import { Input } from '../../input';
 import { Label } from '../../label';
-import type { IFileItem } from '../model';
+import type { IFileItem, IFileUploadProps } from '../model';
+
+defineProps<IFileUploadProps>();
 
 const emit = defineEmits<{ (event: 'change', files: IFileItem[]): void }>();
 
@@ -69,7 +70,7 @@ const onChangeFiles = (event: Event) => {
     >
       Clear all
     </Button>
-    <Carousel class="select-none">
+    <Carousel>
       <CarouselContent class="-ml-1">
         <CarouselItem
           v-for="({ name, size, blobUrl }, index) in files"
@@ -95,16 +96,13 @@ const onChangeFiles = (event: Event) => {
           </Attachment>
         </CarouselItem>
       </CarouselContent>
-      <div class="mt-2 space-x-2">
-        <CarouselPrevious />
-        <CarouselNext />
-      </div>
+      <CarouselActions />
     </Carousel>
   </div>
   <div v-else class="flex">
     <Label
       for="file-input"
-      :disabled="$attrs.disabled"
+      :disabled="disabled"
       class="basis-1/2 cursor-pointer rounded-md border border-dashed"
     >
       <div class="flex aspect-square w-full items-center justify-center">
@@ -115,9 +113,9 @@ const onChangeFiles = (event: Event) => {
       id="file-input"
       type="file"
       class="hidden"
-      :disabled="$attrs.disabled"
-      :multiple="$attrs.multiple"
-      :accept="$attrs.accept"
+      :disabled="disabled"
+      :multiple="multiple"
+      :accept="accept"
       @change="onChangeFiles"
     />
   </div>

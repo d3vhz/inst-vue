@@ -29,5 +29,6 @@ const modelValue = useVModel(props, 'modelValue', emits, {
         props.class
       )
     "
+    :placeholder="placeholder"
   />
 </template>

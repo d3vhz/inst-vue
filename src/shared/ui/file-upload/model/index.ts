@@ -1,1 +1,1 @@
-export type { IFileItem } from './types';
+export type { IFileUploadProps, IFileItem } from './types';

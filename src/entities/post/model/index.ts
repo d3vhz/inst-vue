@@ -2,5 +2,6 @@ export type {
   IPost,
   IPostCreate,
   IPostUpdate,
-  IPostCreateSchema,
+  IPostCreateFormData,
+  IGetPostListParams,
 } from './types';
