@@ -37,20 +37,32 @@ defineProps<{ post: IPost }>();
           <CarouselActions size="xs" />
           <Badge
             :variant="post.status === 'archived' ? 'secondary' : 'default'"
-            >{{ post.status }}</Badge
           >
+            {{ post.status }}
+          </Badge>
         </div>
         <p class="line-clamp-1">
           <small class="text-muted-foreground">{{ post.caption }}</small>
         </p>
-        <RouterLink
-          :to="{
-            name: RouteName.PostShow,
-            params: { id: post.id },
-          }"
-        >
-          <Button size="sm" variant="link">Show</Button>
-        </RouterLink>
+
+        <div class="space-x-2">
+          <RouterLink
+            :to="{
+              name: RouteName.PostShow,
+              params: { id: post.id },
+            }"
+          >
+            <Button size="sm" variant="secondary">Show</Button>
+          </RouterLink>
+          <RouterLink
+            :to="{
+              name: RouteName.PostEdit,
+              params: { id: post.id },
+            }"
+          >
+            <Button size="sm" variant="link">Edit</Button>
+          </RouterLink>
+        </div>
       </div>
     </Carousel>
   </Card>

@@ -31,6 +31,7 @@ const showPassword = ref(false);
         :id="name"
         v-model="value"
         v-bind="$attrs"
+        :placeholder="placeholder"
         :type="
           $attrs.type === 'password' && showPassword ? 'text' : $attrs.type
         "

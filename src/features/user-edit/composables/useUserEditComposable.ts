@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { toast } from 'vue-sonner';
 
 import { useGetUser, useUserDelete, useUserUpdate } from '~/entities/user';
+import { useSignout } from '~/shared/api';
 import { RouteName, toastMessages } from '~/shared/config';
 import { parseError } from '~/shared/lib';
 
@@ -13,6 +14,19 @@ import type { IUserEditFormData } from '../model';
 export function useUserEditComposable() {
   const router = useRouter();
   const route = useRoute();
+
+  const isShowOnboardingMessage = computed(() =>
+    Boolean(route.query.showOnboardingMessage)
+  );
+
+  const closeOnboardingMessage = () => {
+    router.replace({
+      query: {
+        ...route.query,
+        showOnboardingMessage: undefined,
+      },
+    });
+  };
 
   const {
     data,
@@ -48,6 +62,8 @@ export function useUserEditComposable() {
     }
   );
 
+  const { mutateAsync: signOut, isPending: isSignoutPending } = useSignout();
+
   const { mutateAsync: userUpdate, isPending: isUserUpdatePending } =
     useUserUpdate();
   const { mutateAsync: deleteUser, isPending: isUserDeletePending } =
@@ -58,6 +74,7 @@ export function useUserEditComposable() {
 
     try {
       await deleteUser(user.value.id);
+      await signOut();
       toast.success(toastMessages.user.delete);
       router.push({ name: RouteName.SignUp });
     } catch (error) {
@@ -86,8 +103,11 @@ export function useUserEditComposable() {
     isSubmitting ||
     isGetUserPending ||
     isUserUpdatePending ||
-    isUserDeletePending;
-  const isBtnDisabled = computed(() => isDisabled.value || !meta.value.valid);
+    isUserDeletePending ||
+    isSignoutPending;
+  const isBtnDisabled = computed(
+    () => isDisabled.value || !meta.value.valid || !meta.value.dirty
+  );
   const isError = isGetUserError;
   const error = getUserError;
 
@@ -98,6 +118,8 @@ export function useUserEditComposable() {
     error,
     isDisabled,
     isBtnDisabled,
+    isShowOnboardingMessage,
+    closeOnboardingMessage,
     onDeleteUser,
     onEditUser,
   };

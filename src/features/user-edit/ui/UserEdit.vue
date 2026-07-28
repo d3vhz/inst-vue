@@ -14,6 +14,7 @@ import {
 import { useUserEditComposable } from '../composables';
 
 import DeleteUserPopover from './DeleteUserPopover.vue';
+import OnboardingPopover from './OnboardingPopover.vue';
 
 const {
   user,
@@ -22,6 +23,8 @@ const {
   error,
   isDisabled,
   isBtnDisabled,
+  isShowOnboardingMessage,
+  closeOnboardingMessage,
   onDeleteUser,
   onEditUser,
 } = useUserEditComposable();
@@ -42,10 +45,15 @@ const {
         </DeleteUserPopover>
       </div>
       <Form class="w-full space-y-4 md:w-3/4 xl:w-1/2">
-        <Avatar size="xl">
-          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+        <OnboardingPopover
+          :is-open="isShowOnboardingMessage"
+          @close="closeOnboardingMessage"
+        >
+          <Avatar size="xl">
+            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </OnboardingPopover>
         <InputField
           name="firstName"
           label="First name"
