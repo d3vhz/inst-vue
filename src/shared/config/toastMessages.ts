@@ -6,7 +6,12 @@ const toastMessages = {
   },
   post: {
     create: 'The post has been created successfully.',
+    update: 'The post has been updated successfully.',
     delete: 'The post has been deleted successfully.',
+  },
+  user: {
+    update: 'The user has been updated successfully.',
+    delete: 'The user has been deleted successfully.',
   },
 };
 

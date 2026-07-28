@@ -5,9 +5,7 @@ import { cn } from '~/shared/lib';
 
 import { Textarea } from '../../textarea';
 
-const props = defineProps<{
-  class?: HTMLAttributes['class'];
-}>();
+const props = defineProps<{ class?: HTMLAttributes['class'] }>();
 </script>
 
 <template>

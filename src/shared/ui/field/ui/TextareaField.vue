@@ -28,12 +28,7 @@ const { value, errorMessage } = useField<string>(props.name);
     :error-message="errorMessage"
   >
     <InputGroup>
-      <InputGroupTextarea
-        :id="name"
-        v-model="value"
-        v-bind="$attrs"
-        :placeholder="$attrs.placeholder"
-      />
+      <InputGroupTextarea :id="name" v-model="value" v-bind="$attrs" />
       <InputGroupAddon align="block-end">
         <InputGroupText
           :class="

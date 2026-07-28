@@ -5,8 +5,8 @@ import { useRoute } from 'vue-router';
 import { useGetPost } from '~/entities/post';
 import { RouteName } from '~/shared/config';
 import {
-  Attachment,
   AttachmentMedia,
+  AttachmentWrap,
   Button,
   Carousel,
   CarouselActions,
@@ -39,11 +39,11 @@ const post = computed(() => {
             :key="url"
             class="basis-1/2"
           >
-            <Attachment orientation="vertical" class="w-full!">
+            <AttachmentWrap>
               <AttachmentMedia variant="image">
                 <img :src="url" :alt="`imageUrl-${index + 1}`" />
               </AttachmentMedia>
-            </Attachment>
+            </AttachmentWrap>
           </CarouselItem>
         </CarouselContent>
         <CarouselActions />

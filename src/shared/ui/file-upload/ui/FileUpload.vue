@@ -2,7 +2,7 @@
 import { PlusIcon, XIcon } from '@lucide/vue';
 import { ref } from 'vue';
 
-import type { Nullable } from '~/shared/model';
+import type { IFileItem, Nullable } from '~/shared/model';
 
 import {
   Attachment,
@@ -22,7 +22,7 @@ import {
 } from '../../carousel';
 import { Input } from '../../input';
 import { Label } from '../../label';
-import type { IFileItem, IFileUploadProps } from '../model';
+import type { IFileUploadProps } from '../model';
 
 defineProps<IFileUploadProps>();
 
@@ -65,7 +65,7 @@ const onChangeFiles = (event: Event) => {
     <Button
       :disabled="$attrs.disabled"
       size="xs"
-      variant="secondary"
+      variant="muted"
       @click="clearFiles"
     >
       Clear all

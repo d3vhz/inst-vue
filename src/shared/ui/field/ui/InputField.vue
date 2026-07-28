@@ -13,7 +13,7 @@ import type { IInputFieldProps } from '../model';
 
 import { FieldWrap } from './index';
 
-const props = defineProps<IInputFieldProps>();
+const props = withDefaults(defineProps<IInputFieldProps>(), {});
 
 const { value, errorMessage } = useField<string>(props.name);
 const showPassword = ref(false);
@@ -31,7 +31,6 @@ const showPassword = ref(false);
         :id="name"
         v-model="value"
         v-bind="$attrs"
-        :placeholder="$attrs.placeholder"
         :type="
           $attrs.type === 'password' && showPassword ? 'text' : $attrs.type
         "

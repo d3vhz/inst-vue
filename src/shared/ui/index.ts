@@ -12,15 +12,7 @@ export {
 } from './attachment';
 export { Avatar, AvatarFallback, AvatarImage } from './avatar';
 export { Badge } from './badge';
-export {
-  Breadcrumb,
-  BreadcrumbEllipsis,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from './breadcrumb';
+export { Breadcrumbs } from './breadcrumbs';
 export { Button } from './button';
 export {
   Card,
@@ -65,7 +57,6 @@ export {
   FileUploadField,
   ImgUrlsField,
 } from './field';
-export { FileItemSchema, ImageItemSchema, type IFileItem } from './file-upload';
 export { Form } from './form';
 export { Input } from './input';
 export {

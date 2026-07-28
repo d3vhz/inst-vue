@@ -1,28 +1,16 @@
 <script setup lang="ts">
-import { isFunction } from 'es-toolkit/predicate';
-import { computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref } from 'vue';
 
-import { RouteName } from '~/shared/config';
-import { SidebarProvider, SidebarTrigger, ThemeSwitcher } from '~/shared/ui';
+import {
+  Breadcrumbs,
+  SidebarProvider,
+  SidebarTrigger,
+  ThemeSwitcher,
+} from '~/shared/ui';
 
-import { AppBreadcrumbs, type IBreadcrumb } from '../../app-breadcrumbs';
 import { AppSidebar } from '../../app-sidebar';
 
 const open = ref(true);
-
-const route = useRoute();
-
-const breadcrumbs = computed(() => {
-  return route.matched
-    .filter(({ name }) => name !== RouteName.Home)
-    .map(({ meta, children, path }) => ({
-      title: (isFunction(meta.title)
-        ? meta.title(route.params)
-        : meta.title) as IBreadcrumb['title'],
-      path: (children.length ? path : null) as IBreadcrumb['path'],
-    }));
-});
 </script>
 
 <template>
@@ -32,7 +20,7 @@ const breadcrumbs = computed(() => {
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-4">
           <SidebarTrigger />
-          <AppBreadcrumbs v-if="breadcrumbs.length" :items="breadcrumbs" />
+          <Breadcrumbs />
         </div>
         <ThemeSwitcher variant="ghost" size="icon-sm" />
       </div>

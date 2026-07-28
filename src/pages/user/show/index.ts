@@ -1,0 +1,1 @@
+export { UserShowPage } from './ui';

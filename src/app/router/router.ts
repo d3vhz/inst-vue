@@ -18,6 +18,8 @@ const PostCreatePage = () =>
   import('~/pages/post/create/ui/PostCreatePage.vue');
 const PostShowPage = () => import('~/pages/post/show/ui/PostShowPage.vue');
 const PostEditPage = () => import('~/pages/post/edit/ui/PostEditPage.vue');
+const UserShowPage = () => import('~/pages/user/show/ui/UserShowPage.vue');
+const UserEditPage = () => import('~/pages/user/edit/ui/UserEditPage.vue');
 
 const routes: RouteRecordRaw[] = [
   {
@@ -25,7 +27,9 @@ const routes: RouteRecordRaw[] = [
     name: RouteName.Home,
     component: HomePage,
     meta: {
-      title: 'Home',
+      breadcrumb: {
+        label: 'Home',
+      },
     },
   },
   {
@@ -33,13 +37,17 @@ const routes: RouteRecordRaw[] = [
     name: RouteName.About,
     component: AboutPage,
     meta: {
-      title: 'About',
+      breadcrumb: {
+        label: 'About',
+      },
     },
   },
   {
     path: '/posts',
     meta: {
-      title: 'Posts',
+      breadcrumb: {
+        label: 'Posts',
+      },
     },
     children: [
       {
@@ -47,7 +55,9 @@ const routes: RouteRecordRaw[] = [
         name: RouteName.PostList,
         component: PostListPage,
         meta: {
-          title: 'List',
+          breadcrumb: {
+            label: 'List',
+          },
         },
       },
       {
@@ -55,7 +65,9 @@ const routes: RouteRecordRaw[] = [
         name: RouteName.PostCreate,
         component: PostCreatePage,
         meta: {
-          title: 'Create',
+          breadcrumb: {
+            label: 'Create',
+          },
         },
       },
       {
@@ -63,7 +75,9 @@ const routes: RouteRecordRaw[] = [
         name: RouteName.PostShow,
         component: PostShowPage,
         meta: {
-          title: (params: RouteParamsGeneric) => `${params.id}`,
+          breadcrumb: {
+            label: (params: RouteParamsGeneric) => `${params.id}`,
+          },
         },
       },
       {
@@ -71,7 +85,40 @@ const routes: RouteRecordRaw[] = [
         name: RouteName.PostEdit,
         component: PostEditPage,
         meta: {
-          title: (params: RouteParamsGeneric) => `${params.id}`,
+          breadcrumb: {
+            label: (params: RouteParamsGeneric) => `${params.id}`,
+          },
+        },
+      },
+    ],
+  },
+  {
+    path: '/users',
+    meta: {
+      breadcrumb: {
+        label: 'Users',
+        disabled: true,
+      },
+    },
+    children: [
+      {
+        path: ':id',
+        name: RouteName.UserShow,
+        component: UserShowPage,
+        meta: {
+          breadcrumb: {
+            label: (params: RouteParamsGeneric) => `${params.id}`,
+          },
+        },
+      },
+      {
+        path: ':id/edit',
+        name: RouteName.UserEdit,
+        component: UserEditPage,
+        meta: {
+          breadcrumb: {
+            label: (params: RouteParamsGeneric) => `${params.id}`,
+          },
         },
       },
     ],

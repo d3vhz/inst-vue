@@ -58,7 +58,7 @@ const {
               params: { id: post?.id },
             }"
           >
-            <Button variant="secondary">Cancel</Button>
+            <Button variant="muted">Cancel</Button>
           </RouterLink>
           <Button :disabled="isBtnDisabled" @click="onEditPost">
             Update

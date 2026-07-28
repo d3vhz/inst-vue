@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
-import { UrlSchema } from '~/shared/config';
-import { ImageItemSchema } from '~/shared/ui';
+import { ImageItemSchema, UrlSchema } from '~/shared/config';
 
 import {
   CAPTION_MAX_LENGTH,
@@ -28,15 +27,4 @@ const captionSchema = z
   })
   .transform((val) => val.trim());
 
-const postCreateSchema = z.object({
-  images: imagesSchema,
-  caption: captionSchema,
-});
-
-const postEditSchema = z.object({
-  imgUrls: imgUrlsSchema,
-  status: statusSchema.optional(),
-  caption: captionSchema.optional(),
-});
-
-export { postCreateSchema, postEditSchema, statusSchema };
+export { imagesSchema, imgUrlsSchema, statusSchema, captionSchema };

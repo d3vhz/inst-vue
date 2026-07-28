@@ -32,7 +32,7 @@ const postList = computed(() => {
         :filter-props="filter.filterProps"
       />
       <div>
-        <Button variant="secondary" size="sm" @click="resetAllFilters">
+        <Button variant="muted" size="sm" @click="resetAllFilters">
           Clear Filters
         </Button>
       </div>

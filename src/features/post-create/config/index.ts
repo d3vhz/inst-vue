@@ -1,2 +1,2 @@
 export { initialValues } from './constants';
-export { typedPostCreateSchema } from './schemas';
+export { postCreateSchema, typedPostCreateSchema } from './schemas';

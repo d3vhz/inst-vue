@@ -5,9 +5,7 @@ import { cn } from '~/shared/lib';
 
 import { Input } from '../../input';
 
-const props = defineProps<{
-  class?: HTMLAttributes['class'];
-}>();
+const props = defineProps<{ class?: HTMLAttributes['class'] }>();
 </script>
 
 <template>

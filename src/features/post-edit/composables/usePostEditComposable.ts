@@ -6,7 +6,6 @@ import { toast } from 'vue-sonner';
 import {
   CAPTION_MAX_LENGTH,
   IMAGES_MAX_LENGTH,
-  type IPostEditFormData,
   postApi,
   useGetPost,
   usePostDelete,
@@ -16,6 +15,7 @@ import { RouteName, toastMessages } from '~/shared/config';
 import { parseError } from '~/shared/lib';
 
 import { typedPostEditSchema } from '../config';
+import type { IPostEditFormData } from '../model';
 
 export function usePostEditComposable() {
   const router = useRouter();
@@ -36,9 +36,9 @@ export function usePostEditComposable() {
     useForm<IPostEditFormData>({
       validationSchema: typedPostEditSchema,
       initialValues: {
-        imgUrls: post.value?.imgUrls ?? [],
-        caption: post.value?.caption ?? '',
-        status: post.value?.status ?? 'active',
+        imgUrls: post.value?.imgUrls,
+        caption: post.value?.caption,
+        status: post.value?.status,
       },
     });
 
@@ -49,9 +49,9 @@ export function usePostEditComposable() {
 
       resetForm({
         values: {
-          imgUrls: post.value?.imgUrls ?? [],
-          caption: post.value?.caption ?? '',
-          status: post.value?.status ?? 'active',
+          imgUrls: newPost.imgUrls,
+          caption: newPost.caption,
+          status: newPost.status,
         },
       });
     }
@@ -89,7 +89,7 @@ export function usePostEditComposable() {
         await postApi.deleteFiles(removedImgUrls);
       }
       resetForm();
-      toast.success(toastMessages.post.create);
+      toast.success(toastMessages.post.update);
       router.push({ name: RouteName.PostList });
     } catch (error) {
       toast.error(parseError(error));

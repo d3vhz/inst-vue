@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useField } from 'vee-validate';
 
-import { FileUpload, type IFileItem } from '../../file-upload';
+import type { IFileItem } from '~/shared/model';
+
+import { FileUpload } from '../../file-upload';
 import type { IFieldBaseProps } from '../model';
 
 import { FieldWrap } from './index';

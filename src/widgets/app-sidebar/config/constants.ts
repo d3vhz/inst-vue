@@ -2,7 +2,7 @@ import { HomeIcon, ImagesIcon, InfoIcon, PlusIcon } from '@lucide/vue';
 
 import { RouteName } from '~/shared/config';
 
-import type { IMenuItem, IUserDropdownMenuItem } from '../model';
+import type { IMenuItem } from '../model';
 
 const menuItems: IMenuItem[] = [
   {
@@ -27,17 +27,4 @@ const menuItems: IMenuItem[] = [
   },
 ];
 
-const userDropdownItems: IUserDropdownMenuItem[] = [
-  {
-    title: 'Account',
-    routeName: RouteName.Home,
-    disabled: true,
-  },
-  {
-    title: 'Settings',
-    routeName: RouteName.Home,
-    disabled: true,
-  },
-];
-
-export { menuItems, userDropdownItems };
+export { menuItems };

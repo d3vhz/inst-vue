@@ -6,7 +6,6 @@ import { toast } from 'vue-sonner';
 import {
   CAPTION_MAX_LENGTH,
   IMAGES_MAX_LENGTH,
-  type IPostCreateFormData,
   usePostCreate,
   usePostUpdate,
 } from '~/entities/post';
@@ -16,6 +15,7 @@ import { parseError } from '~/shared/lib';
 
 import { initialValues, typedPostCreateSchema } from '../config';
 import { uploadMultipleFiles } from '../lib';
+import type { IPostCreateFormData } from '../model';
 
 export function usePostCreateComposable() {
   const router = useRouter();
