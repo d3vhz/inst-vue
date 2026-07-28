@@ -36,9 +36,7 @@ const {
       <div class="flex justify-between gap-4">
         <h3>Edit Post</h3>
         <DeletePostPopover @delete-post="onDeletePost">
-          <Button variant="destructive" :disabled="isBtnDisabled">
-            <Trash2Icon /> Delete
-          </Button>
+          <Button variant="destructive"><Trash2Icon />Delete</Button>
         </DeletePostPopover>
       </div>
       <Form class="w-full space-y-4 md:w-3/4 xl:w-1/2">

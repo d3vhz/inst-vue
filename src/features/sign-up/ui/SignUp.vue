@@ -22,11 +22,14 @@ const { mutateAsync: signUp, isPending } = useSignUp();
 
 const onSubmit = handleSubmit(async ({ email, password }) => {
   try {
-    await signUp({ email, password });
+    const data = await signUp({ email, password });
     resetForm();
     toast.success(toastMessages.auth.signUp);
     router.push({
-      name: RouteName.Home,
+      name: RouteName.UserEdit,
+      params: {
+        id: data.user?.id,
+      },
       query: { showOnboardingMessage: 'true' },
     });
   } catch (error) {

@@ -15,8 +15,8 @@ const emit = defineEmits<{ (event: 'delete-user'): void }>();
     <PopoverTrigger>
       <slot />
     </PopoverTrigger>
-    <PopoverContent :side-offset="10">
-      <div class="space-y-4">
+    <PopoverContent :side-offset="10" class="w-fit">
+      <div class="space-y-2">
         <div>
           <small>Are you sure you want to delete your account?</small>
         </div>

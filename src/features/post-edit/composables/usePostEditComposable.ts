@@ -102,7 +102,9 @@ export function usePostEditComposable() {
     isGetPostPending ||
     isPostUpdatePending ||
     isPostDeletePending;
-  const isBtnDisabled = computed(() => isDisabled.value || !meta.value.valid);
+  const isBtnDisabled = computed(
+    () => isDisabled.value || !meta.value.valid || !meta.value.dirty
+  );
   const isError = isGetPostError;
   const error = getPostError;
 

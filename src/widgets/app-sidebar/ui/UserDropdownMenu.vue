@@ -21,7 +21,7 @@ import { useUserDropdownItems } from '../composables';
 const { user, userDropdownItems } = useUserDropdownItems();
 
 const router = useRouter();
-const { mutateAsync: signOut } = useSignout();
+const { mutateAsync: signOut, isPending } = useSignout();
 
 const onSignOut = async () => {
   try {
@@ -68,7 +68,7 @@ const onSignOut = async () => {
       >
         <span>{{ title }}</span>
       </DropdownMenuItem>
-      <DropdownMenuItem @click="onSignOut">
+      <DropdownMenuItem :disabled="isPending" @click="onSignOut">
         <span>Logout</span>
       </DropdownMenuItem>
     </DropdownMenuContent>
