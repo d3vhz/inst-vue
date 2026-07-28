@@ -7,8 +7,10 @@ export {
   postApi,
 } from './api';
 export {
-  postCreateSchema,
-  postEditSchema,
+  imagesSchema,
+  imgUrlsSchema,
+  statusSchema,
+  captionSchema,
   queryKeys,
   statusItems,
   CAPTION_MIN_LENGTH,
@@ -20,7 +22,5 @@ export type {
   IPost,
   IPostCreate,
   IPostEdit,
-  IPostCreateFormData,
-  IPostEditFormData,
   IGetPostListParams,
 } from './model';

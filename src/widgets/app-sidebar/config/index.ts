@@ -1,1 +1,1 @@
-export { menuItems, userDropdownItems } from './constants';
+export { menuItems } from './constants';

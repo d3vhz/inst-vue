@@ -1,7 +1,13 @@
 import { toTypedSchema } from '@vee-validate/zod';
+import { z } from 'zod';
 
-import { postCreateSchema } from '~/entities/post';
+import { captionSchema, imagesSchema } from '~/entities/post';
+
+const postCreateSchema = z.object({
+  images: imagesSchema,
+  caption: captionSchema,
+});
 
 const typedPostCreateSchema = toTypedSchema(postCreateSchema);
 
-export { typedPostCreateSchema };
+export { postCreateSchema, typedPostCreateSchema };

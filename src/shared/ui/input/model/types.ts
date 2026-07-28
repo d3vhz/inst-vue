@@ -1,13 +1,10 @@
-import type { InputHTMLAttributes } from 'vue';
+import type { HTMLAttributes } from 'vue';
 
-type IInputBaseProps = Pick<
-  InputHTMLAttributes,
-  'value' | 'placeholder' | 'class' | 'disabled' | 'readonly' | 'maxlength'
->;
-
-type IInputProps = IInputBaseProps & {
+type IInputProps = {
+  class?: HTMLAttributes['class'];
   defaultValue?: string | number;
   modelValue?: string | number;
+  placeholder?: string;
 };
 
 export type { IInputProps };

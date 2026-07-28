@@ -3,6 +3,8 @@ import { useDebounceFn } from '@vueuse/core';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
+import { DEBOUNCE_TIME } from '~/shared/config';
+
 import { Input } from '../../input';
 import { Select } from '../../select';
 import { useQueryFilters } from '../composables';
@@ -15,10 +17,10 @@ const route = useRoute();
 
 const { setFilter } = useQueryFilters();
 
-const handleDebouncedValueChange = useDebounceFn(setFilter, 500);
+const handleDebouncedValueChange = useDebounceFn(setFilter, DEBOUNCE_TIME);
 
-const handleChange = (value: string) => {
-  handleDebouncedValueChange(props.queryKey, value);
+const handleChange = (value: string | number) => {
+  handleDebouncedValueChange(props.queryKey, String(value));
 };
 
 const queryValue = computed(
@@ -38,8 +40,6 @@ const queryValue = computed(
     v-else
     v-bind="filterProps"
     :model-value="queryValue"
-    @input="
-      (event: Event) => handleChange((event.target as HTMLInputElement).value)
-    "
+    @update:model-value="handleChange"
   />
 </template>

@@ -1,5 +1,5 @@
 import { postApi } from '~/entities/post';
-import type { IFileItem } from '~/shared/ui';
+import type { IFileItem } from '~/shared/model';
 
 const uploadMultipleFiles = async ({
   path,

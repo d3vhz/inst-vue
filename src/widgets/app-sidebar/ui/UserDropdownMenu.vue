@@ -3,7 +3,7 @@ import { ChevronsUpDownIcon } from '@lucide/vue';
 import { useRouter } from 'vue-router';
 import { toast } from 'vue-sonner';
 
-import { useAuthStore, useSignout } from '~/shared/api';
+import { useSignout } from '~/shared/api';
 import { RouteName, toastMessages } from '~/shared/config';
 import { parseError } from '~/shared/lib';
 import {
@@ -16,11 +16,12 @@ import {
   DropdownMenuTrigger,
 } from '~/shared/ui';
 
-import { userDropdownItems } from '../config';
+import { useUserDropdownItems } from '../composables';
+
+const { user, userDropdownItems } = useUserDropdownItems();
 
 const router = useRouter();
 const { mutateAsync: signOut } = useSignout();
-const authStore = useAuthStore();
 
 const onSignOut = async () => {
   try {
@@ -45,7 +46,7 @@ const onSignOut = async () => {
           <div class="flex flex-col gap-1">
             <small>User</small>
             <small class="text-muted-foreground">
-              {{ authStore.user.email }}
+              {{ user.email }}
             </small>
           </div>
         </div>
@@ -60,10 +61,10 @@ const onSignOut = async () => {
       :side-offset="8"
     >
       <DropdownMenuItem
-        v-for="{ title, routeName, disabled } in userDropdownItems"
+        v-for="{ title, routeName, routeParams, disabled } in userDropdownItems"
         :key="title"
         :disabled="disabled"
-        @click="router.push({ name: routeName })"
+        @click="router.push({ name: routeName, params: routeParams })"
       >
         <span>{{ title }}</span>
       </DropdownMenuItem>

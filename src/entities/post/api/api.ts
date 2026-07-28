@@ -1,5 +1,5 @@
 import { api, formatPath, storageApi } from '~/shared/api';
-import type { IFileItem } from '~/shared/ui';
+import type { IFileItem } from '~/shared/model';
 
 import type {
   IGetPostListParams,

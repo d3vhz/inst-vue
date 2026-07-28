@@ -17,7 +17,7 @@ interface IFieldWrapProps extends IFieldBaseProps {
   errorMessage?: string;
 }
 
-interface IInputFieldProps extends IInputProps, IFieldBaseProps {}
+type IInputFieldProps = IInputProps & IFieldBaseProps;
 
 interface ITextareaFieldProps extends ITextAreaProps, IFieldBaseProps {
   maxLength?: number;

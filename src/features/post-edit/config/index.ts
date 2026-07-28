@@ -1,1 +1,1 @@
-export { typedPostEditSchema } from './schemas';
+export { postEditSchema, typedPostEditSchema } from './schemas';

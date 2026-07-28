@@ -1,6 +1,6 @@
 import type z from 'zod';
 
-import type { postCreateSchema, postEditSchema, statusSchema } from '../config';
+import type { statusSchema } from '../config';
 
 type IPost = {
   id: string;
@@ -11,12 +11,10 @@ type IPost = {
 };
 
 type IPostStatus = z.infer<typeof statusSchema>;
-type IPostCreateFormData = z.infer<typeof postCreateSchema>;
-type IPostEditFormData = z.infer<typeof postEditSchema>;
 
-type IPostCreate = Pick<IPostCreateFormData, 'caption'>;
+type IPostCreate = Pick<IPost, 'caption'>;
 
-type IPostEdit = IPostEditFormData;
+type IPostEdit = Partial<Pick<IPost, 'caption' | 'status' | 'imgUrls'>>;
 
 type IGetPostListParams = {
   search: string;
@@ -25,11 +23,4 @@ type IGetPostListParams = {
   status: IPostStatus;
 };
 
-export type {
-  IPost,
-  IPostCreate,
-  IPostEdit,
-  IPostCreateFormData,
-  IPostEditFormData,
-  IGetPostListParams,
-};
+export type { IPost, IPostCreate, IPostEdit, IGetPostListParams };

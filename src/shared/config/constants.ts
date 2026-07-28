@@ -7,6 +7,10 @@ const RouteName = {
   PostCreate: 'post-create',
   PostShow: 'post-show',
   PostEdit: 'post-edit',
+  UserShow: 'user-show',
+  UserEdit: 'user-edit',
 } as const;
 
-export { RouteName };
+const DEBOUNCE_TIME = 500;
+
+export { RouteName, DEBOUNCE_TIME };

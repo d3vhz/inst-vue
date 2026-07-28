@@ -22,7 +22,7 @@ const emit = defineEmits<{ (event: 'delete-post'): void }>();
         </div>
         <div class="space-x-2">
           <PopoverClose as-child>
-            <Button size="xs" variant="secondary">Cancel</Button>
+            <Button size="xs" variant="muted">Cancel</Button>
           </PopoverClose>
           <PopoverClose as-child>
             <Button
