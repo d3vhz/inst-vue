@@ -9,8 +9,6 @@ import { RouteName } from '~/shared/config';
 
 import { authGuard } from './guards';
 
-const HomePage = () => import('~/pages/home/ui/HomePage.vue');
-const AboutPage = () => import('~/pages/about/ui/AboutPage.vue');
 const SignInPage = () => import('~/pages/auth/sign-in/ui/SignInPage.vue');
 const SignUpPage = () => import('~/pages/auth/sign-up/ui/SignUpPage.vue');
 const PostListPage = () => import('~/pages/post/list/ui/PostListPage.vue');
@@ -24,23 +22,7 @@ const UserEditPage = () => import('~/pages/user/edit/ui/UserEditPage.vue');
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: RouteName.Home,
-    component: HomePage,
-    meta: {
-      breadcrumb: {
-        label: 'Home',
-      },
-    },
-  },
-  {
-    path: '/about',
-    name: RouteName.About,
-    component: AboutPage,
-    meta: {
-      breadcrumb: {
-        label: 'About',
-      },
-    },
+    redirect: { name: RouteName.PostList },
   },
   {
     path: '/posts',

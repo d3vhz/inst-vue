@@ -30,7 +30,10 @@ import UserDropdownMenu from './UserDropdownMenu.vue';
               :key="title"
             >
               <SidebarMenuButton as-child :tooltip="title">
-                <RouterLink :to="{ name: routeName }">
+                <RouterLink
+                  exact-active-class="text-primary"
+                  :to="{ name: routeName }"
+                >
                   <component :is="icon" />
                   <span>{{ title }}</span>
                 </RouterLink>

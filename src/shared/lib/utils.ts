@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from 'clsx';
+import { filesize } from 'filesize';
 import { twMerge } from 'tailwind-merge';
 
 const cn = (...inputs: ClassValue[]) => {
@@ -13,4 +14,8 @@ const parseError = (error: unknown) => {
   return String(error) || 'An unknown error occurred';
 };
 
-export { cn, parseError };
+const getFileSize = (size: number) => {
+  return filesize(size);
+};
+
+export { cn, parseError, getFileSize };

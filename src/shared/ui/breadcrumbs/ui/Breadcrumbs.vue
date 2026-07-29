@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { RouteName } from '~/shared/config';
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -16,10 +14,6 @@ const { breadcrumbs } = useBreadcrumbs();
 <template>
   <Breadcrumb v-if="breadcrumbs.length">
     <BreadcrumbList>
-      <BreadcrumbItem>
-        <RouterLink :to="{ name: RouteName.Home }">Home</RouterLink>
-      </BreadcrumbItem>
-      <BreadcrumbSeparator />
       <BreadcrumbItem>
         <template
           v-for="({ label, path, disabled }, index) in breadcrumbs"
