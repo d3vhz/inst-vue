@@ -118,7 +118,7 @@ npm run dev
 
 ### Admin credentials:
 
-Login: create7321@gmail.com 
+Login: create7321@gmail.com  
 Password: Inst123@
 
 ---
