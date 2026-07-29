@@ -15,7 +15,7 @@ export function useUserDropdownItems() {
     },
     {
       title: 'Settings',
-      routeName: RouteName.Home,
+      routeName: RouteName.UserShow,
       disabled: true,
     },
   ];

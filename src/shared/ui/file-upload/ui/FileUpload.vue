@@ -2,6 +2,7 @@
 import { PlusIcon, XIcon } from '@lucide/vue';
 import { ref } from 'vue';
 
+import { getFileSize } from '~/shared/lib';
 import type { IFileItem, Nullable } from '~/shared/model';
 
 import {
@@ -62,12 +63,7 @@ const onChangeFiles = (event: Event) => {
 
 <template>
   <div v-if="files.length" class="space-y-2">
-    <Button
-      :disabled="$attrs.disabled"
-      size="xs"
-      variant="muted"
-      @click="clearFiles"
-    >
+    <Button :disabled="disabled" size="xs" variant="muted" @click="clearFiles">
       Clear all
     </Button>
     <Carousel>
@@ -83,10 +79,13 @@ const onChangeFiles = (event: Event) => {
             </AttachmentMedia>
             <AttachmentContent>
               <AttachmentTitle>{{ name }}</AttachmentTitle>
-              <AttachmentDescription>{{ size }}</AttachmentDescription>
+              <AttachmentDescription>
+                {{ getFileSize(size) }}
+              </AttachmentDescription>
             </AttachmentContent>
             <AttachmentActions>
               <AttachmentAction
+                :disabled="disabled"
                 :aria-label="`Remove ${name}`"
                 @click="onRemoveFile(index)"
               >

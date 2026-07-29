@@ -1,2 +1,2 @@
 export { isUrl, isImageItemSchema } from './predicates';
-export { cn, parseError } from './utils';
+export { cn, parseError, getFileSize } from './utils';
