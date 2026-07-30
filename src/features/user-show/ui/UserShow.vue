@@ -17,7 +17,7 @@ const { data, isPending, isError, error } = useGetUser(
 );
 
 const user = computed(() => {
-  return data.value?.data;
+  return data.value;
 });
 </script>
 

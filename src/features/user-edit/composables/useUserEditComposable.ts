@@ -36,7 +36,7 @@ export function useUserEditComposable() {
   } = useGetUser(route.params.id as string);
 
   const user = computed(() => {
-    return data.value?.data;
+    return data.value;
   });
 
   const { handleSubmit, resetForm, isSubmitting, meta } =

@@ -1,5 +1,5 @@
 const queryKeys = {
-  user: (id?: string) => ['user', id],
+  user: (id: string) => ['user', id],
 };
 
 const USER_ROLES = ['admin', 'user'] as const;

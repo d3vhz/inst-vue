@@ -24,7 +24,7 @@ const { user: authUser, userDropdownItems } = useUserDropdownItems();
 
 const router = useRouter();
 const { data, isPending: isGetUserPending } = useGetUser(authUser.id as string);
-const user = computed(() => data.value?.data);
+const user = computed(() => data.value);
 const { mutateAsync: signOut, isPending: isSignOutPending } = useSignout();
 
 const onSignOut = async () => {

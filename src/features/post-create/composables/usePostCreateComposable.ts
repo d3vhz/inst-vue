@@ -37,10 +37,10 @@ export function usePostCreateComposable() {
     try {
       const post = await postCreate({ caption: data.caption });
       const imgUrls = await uploadMultipleFiles({
-        path: `${authStore.user.id}/posts/${post.data.id}`,
+        path: `${authStore.user.id}/posts/${post.id}`,
         files: data.images,
       });
-      await postUpdate({ id: post.data.id, data: { imgUrls } });
+      await postUpdate({ id: post.id, data: { imgUrls } });
       resetForm();
       toast.success(toastMessages.post.create);
       router.push({ name: RouteName.PostList });
