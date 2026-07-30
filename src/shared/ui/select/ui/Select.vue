@@ -13,7 +13,7 @@ const props = defineProps<ISelectProps>();
 
 <template>
   <SelectComp v-bind="$attrs">
-    <SelectTrigger>
+    <SelectTrigger v-bind="selectTriggerProps">
       <SelectValue :placeholder="props.placeholder" />
     </SelectTrigger>
     <SelectContent>

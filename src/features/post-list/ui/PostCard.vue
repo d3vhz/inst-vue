@@ -2,8 +2,6 @@
 import { type IPost } from '~/entities/post';
 import { RouteName } from '~/shared/config';
 import {
-  AttachmentMedia,
-  AttachmentWrap,
   Badge,
   Button,
   Card,
@@ -11,6 +9,9 @@ import {
   CarouselActions,
   CarouselContent,
   CarouselItem,
+  Image,
+  ImageFallback,
+  ImageRoot,
 } from '~/shared/ui';
 
 defineProps<{ post: IPost }>();
@@ -21,15 +22,14 @@ defineProps<{ post: IPost }>();
     <Carousel>
       <CarouselContent>
         <CarouselItem
-          v-for="url in post.imgUrls"
+          v-for="(url, index) in post.imgUrls"
           :key="url"
           class="aspect-square basis-full pl-0"
         >
-          <AttachmentWrap>
-            <AttachmentMedia variant="image" class="rounded-none">
-              <img :src="url" :alt="post.caption" />
-            </AttachmentMedia>
-          </AttachmentWrap>
+          <ImageRoot>
+            <Image :src="url" :alt="`post-card-image-${index}`" />
+            <ImageFallback>Post Card Image</ImageFallback>
+          </ImageRoot>
         </CarouselItem>
       </CarouselContent>
       <div class="space-y-2 p-2">

@@ -1,5 +1,4 @@
 export {
-  AttachmentWrap,
   Attachment,
   AttachmentAction,
   AttachmentActions,

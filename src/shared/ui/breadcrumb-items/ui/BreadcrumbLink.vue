@@ -1,26 +1,28 @@
 <script lang="ts" setup>
-import type { PrimitiveProps } from 'reka-ui';
-import { Primitive } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
+import type { RouterLinkProps } from 'vue-router';
 
 import { cn } from '~/shared/lib';
 
 const props = withDefaults(
-  defineProps<PrimitiveProps & { class?: HTMLAttributes['class'] }>(),
+  defineProps<RouterLinkProps & { class?: HTMLAttributes['class'] }>(),
   {
-    as: 'a',
     class: '',
   }
 );
 </script>
 
 <template>
-  <Primitive
+  <RouterLink
     data-slot="breadcrumb-link"
-    :as="as"
-    :as-child="asChild"
-    :class="cn('hover:text-foreground transition-colors', props.class)"
+    v-bind="props"
+    :class="
+      cn(
+        'hover:text-foreground text-primary max-w-40 truncate transition-colors lg:max-w-fit',
+        props.class
+      )
+    "
   >
     <slot />
-  </Primitive>
+  </RouterLink>
 </template>

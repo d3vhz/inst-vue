@@ -1,3 +1,4 @@
+export type { ISelectTriggerProps } from './model';
 export {
   SelectComp,
   SelectContent,

@@ -8,6 +8,7 @@ const useGetUser = (userId: string) => {
   return useQuery({
     queryFn: () => userApi.getUser(userId),
     queryKey: [queryKeys.user(userId)],
+    enabled: Boolean(userId),
   });
 };
 

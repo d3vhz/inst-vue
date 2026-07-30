@@ -5,4 +5,5 @@ export {
   InputGroupInput,
   InputGroupText,
   InputGroupTextarea,
+  SelectGroupInput,
 } from './ui';

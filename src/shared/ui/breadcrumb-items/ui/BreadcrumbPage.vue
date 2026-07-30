@@ -16,7 +16,7 @@ const props = defineProps<{
     aria-current="page"
     :class="
       cn(
-        'text-foreground pointer-events-none font-normal opacity-50',
+        'text-foreground pointer-events-none max-w-40 truncate font-normal opacity-50 lg:max-w-fit',
         props.class
       )
     "

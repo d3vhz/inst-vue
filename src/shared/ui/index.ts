@@ -1,6 +1,5 @@
 export { Alert, AlertDescription, AlertTitle } from './alert';
 export {
-  AttachmentWrap,
   Attachment,
   AttachmentAction,
   AttachmentActions,
@@ -59,6 +58,7 @@ export {
   ImgUrlsField,
 } from './field';
 export { Form } from './form';
+export { Image, ImageFallback, ImageRoot } from './image';
 export { Input } from './input';
 export {
   Popover,

@@ -21,6 +21,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from '../../carousel';
+import { Image, ImageFallback, ImageRoot } from '../../image';
 import { Input } from '../../input';
 import { Label } from '../../label';
 import type { IFileUploadProps } from '../model';
@@ -75,7 +76,10 @@ const onChangeFiles = (event: Event) => {
         >
           <Attachment orientation="vertical" class="w-full!">
             <AttachmentMedia variant="image">
-              <img :src="blobUrl" :alt="name" />
+              <ImageRoot>
+                <Image :src="blobUrl" :alt="`image-${index}`" />
+                <ImageFallback>Image</ImageFallback>
+              </ImageRoot>
             </AttachmentMedia>
             <AttachmentContent>
               <AttachmentTitle>{{ name }}</AttachmentTitle>

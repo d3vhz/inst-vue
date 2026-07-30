@@ -11,7 +11,7 @@ const menuItems: IMenuItem[] = [
     icon: ImagesIcon,
   },
   {
-    title: 'Create',
+    title: 'Create Post',
     routeName: RouteName.PostCreate,
     icon: PlusIcon,
   },

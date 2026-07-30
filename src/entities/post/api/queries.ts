@@ -10,6 +10,7 @@ const useGetPost = (postId: string) => {
   return useQuery({
     queryFn: () => postApi.getPost(postId),
     queryKey: [queryKeys.post(postId)],
+    enabled: Boolean(postId),
   });
 };
 

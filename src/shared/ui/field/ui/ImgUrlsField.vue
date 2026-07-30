@@ -16,6 +16,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from '../../carousel';
+import { Image, ImageFallback, ImageRoot } from '../../image';
 import type { IFieldBaseProps } from '../model';
 
 import { FieldWrap } from './index';
@@ -46,7 +47,10 @@ const onRemoveFile = (url: IUrl) => {
         >
           <Attachment orientation="vertical" class="w-full!">
             <AttachmentMedia variant="image">
-              <img :src="url" :alt="`imageUrl-${index + 1}`" />
+              <ImageRoot>
+                <Image :src="url" :alt="`image-${index}`" />
+                <ImageFallback>Image</ImageFallback>
+              </ImageRoot>
             </AttachmentMedia>
             <AttachmentActions v-if="imgUrls.length > 1">
               <AttachmentAction
