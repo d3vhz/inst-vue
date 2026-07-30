@@ -2,6 +2,7 @@
 import {
   Breadcrumb,
   BreadcrumbItem,
+  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
@@ -19,9 +20,9 @@ const { breadcrumbs } = useBreadcrumbs();
           v-for="({ label, path, disabled }, index) in breadcrumbs"
           :key="label"
         >
-          <RouterLink v-if="path && !disabled" :to="path">
+          <BreadcrumbLink v-if="path && !disabled" :to="path">
             {{ label }}
-          </RouterLink>
+          </BreadcrumbLink>
           <BreadcrumbPage v-else :data-disabled="disabled">
             {{ label }}
           </BreadcrumbPage>

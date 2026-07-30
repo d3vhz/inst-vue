@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ChevronsUpDownIcon } from '@lucide/vue';
+import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { toast } from 'vue-sonner';
 
+import { useGetUser } from '~/entities/user';
 import { useSignout } from '~/shared/api';
 import { RouteName, toastMessages } from '~/shared/config';
 import { parseError } from '~/shared/lib';
@@ -18,10 +20,12 @@ import {
 
 import { useUserDropdownItems } from '../composables';
 
-const { user, userDropdownItems } = useUserDropdownItems();
+const { user: authUser, userDropdownItems } = useUserDropdownItems();
 
 const router = useRouter();
-const { mutateAsync: signOut, isPending } = useSignout();
+const { data, isPending: isGetUserPending } = useGetUser(authUser.id as string);
+const user = computed(() => data.value?.data);
+const { mutateAsync: signOut, isPending: isSignOutPending } = useSignout();
 
 const onSignOut = async () => {
   try {
@@ -37,22 +41,29 @@ const onSignOut = async () => {
 <template>
   <DropdownMenu>
     <DropdownMenuTrigger as-child>
-      <div class="flex cursor-pointer items-center justify-between">
-        <div class="flex items-center gap-4">
+      <div class="flex cursor-pointer items-center justify-between gap-4">
+        <div class="flex items-center gap-4 truncate">
           <Avatar size="lg">
             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <div class="flex flex-col gap-1">
-            <small>User</small>
-            <small class="text-muted-foreground">
-              {{ user.email }}
-            </small>
+          <div class="flex flex-col gap-1 truncate">
+            <small v-if="isGetUserPending">...loading</small>
+            <small v-else-if="!user">No data</small>
+            <template v-else>
+              <small
+                v-if="user.firstName || user.lastName"
+                class="text-muted-foreground truncate"
+              >
+                {{ user.firstName }} {{ user.lastName }}
+              </small>
+              <small class="text-muted-foreground truncate">
+                {{ authUser.email }}
+              </small>
+            </template>
           </div>
         </div>
-        <div>
-          <ChevronsUpDownIcon class="size-4" />
-        </div>
+        <ChevronsUpDownIcon class="size-4 shrink-0" />
       </div>
     </DropdownMenuTrigger>
     <DropdownMenuContent
@@ -68,7 +79,7 @@ const onSignOut = async () => {
       >
         <span>{{ title }}</span>
       </DropdownMenuItem>
-      <DropdownMenuItem :disabled="isPending" @click="onSignOut">
+      <DropdownMenuItem :disabled="isSignOutPending" @click="onSignOut">
         <span>Logout</span>
       </DropdownMenuItem>
     </DropdownMenuContent>

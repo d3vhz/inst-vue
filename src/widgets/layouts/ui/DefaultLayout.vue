@@ -17,12 +17,15 @@ const open = ref(true);
   <SidebarProvider :open="open" @update:open="open = $event">
     <AppSidebar />
     <main class="flex h-dvh w-full flex-col px-6 py-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-4">
-          <SidebarTrigger />
-          <Breadcrumbs />
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <SidebarTrigger />
+            <Breadcrumbs class="hidden lg:block" />
+          </div>
+          <ThemeSwitcher variant="ghost" size="icon-sm" />
         </div>
-        <ThemeSwitcher variant="ghost" size="icon-sm" />
+        <Breadcrumbs class="lg:hidden" />
       </div>
       <div class="flex-1">
         <slot />

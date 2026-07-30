@@ -10,7 +10,7 @@ defineProps<IThemeSwitcherProps>();
 </script>
 
 <template>
-  <div class="space-x-1">
+  <div class="shrink-0 space-x-1">
     <Button
       v-for="{ label, icon } in themeItems"
       :key="label"

@@ -5,13 +5,14 @@ import { useRoute } from 'vue-router';
 import { useGetPost } from '~/entities/post';
 import { RouteName } from '~/shared/config';
 import {
-  AttachmentMedia,
-  AttachmentWrap,
   Button,
   Carousel,
   CarouselActions,
   CarouselContent,
   CarouselItem,
+  Image,
+  ImageFallback,
+  ImageRoot,
 } from '~/shared/ui';
 
 const route = useRoute();
@@ -39,11 +40,10 @@ const post = computed(() => {
             :key="url"
             class="basis-1/2"
           >
-            <AttachmentWrap>
-              <AttachmentMedia variant="image">
-                <img :src="url" :alt="`imageUrl-${index + 1}`" />
-              </AttachmentMedia>
-            </AttachmentWrap>
+            <ImageRoot>
+              <Image :src="url" :alt="`post-image-${index}`" />
+              <ImageFallback>Post Image</ImageFallback>
+            </ImageRoot>
           </CarouselItem>
         </CarouselContent>
         <CarouselActions />
