@@ -1,8 +1,10 @@
 import { pascalCase } from 'es-toolkit/string';
 
+import type { IGetPostListParams } from '../model';
+
 const queryKeys = {
-  all: ['posts'],
   post: (id: string) => ['post', id],
+  list: (params?: IGetPostListParams) => ['post', 'list', params ?? {}],
 };
 
 const STATUSES = ['active', 'archived'] as const;

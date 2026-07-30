@@ -15,7 +15,7 @@ const { data, isPending, isError, error } = useGetPostList(
 );
 
 const postList = computed(() => {
-  return data.value?.data?.posts ?? [];
+  return data.value?.posts ?? [];
 });
 </script>
 

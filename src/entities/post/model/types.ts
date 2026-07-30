@@ -16,11 +16,13 @@ type IPostCreate = Pick<IPost, 'caption'>;
 
 type IPostEdit = Partial<Pick<IPost, 'caption' | 'status' | 'imgUrls'>>;
 
-type IGetPostListParams = {
+type SearchParams = {
   search: string;
   page: string;
   limit: string;
   status: IPostStatus;
 };
+
+type IGetPostListParams = Partial<SearchParams>;
 
 export type { IPost, IPostCreate, IPostEdit, IGetPostListParams };

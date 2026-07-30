@@ -22,7 +22,7 @@ const { data, isPending, isError, error } = useGetPost(
 );
 
 const post = computed(() => {
-  return data.value?.data;
+  return data.value;
 });
 </script>
 

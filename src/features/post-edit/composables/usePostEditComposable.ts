@@ -29,7 +29,7 @@ export function usePostEditComposable() {
   } = useGetPost(route.params.id as string);
 
   const post = computed(() => {
-    return data.value?.data;
+    return data.value;
   });
 
   const { handleSubmit, resetForm, isSubmitting, meta } =

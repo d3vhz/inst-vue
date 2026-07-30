@@ -3,7 +3,7 @@ import { useDebounceFn } from '@vueuse/core';
 import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { DEBOUNCE_TIME } from '~/shared/config';
+import { DEFAULT_DEBOUNCE_TIME } from '~/shared/config';
 
 import {
   InputGroup,
@@ -28,7 +28,10 @@ const queryValue = computed(
 
 const localValue = ref<string | number>(queryValue.value);
 
-const handleDebouncedValueChange = useDebounceFn(setFilter, DEBOUNCE_TIME);
+const handleDebouncedValueChange = useDebounceFn(
+  setFilter,
+  DEFAULT_DEBOUNCE_TIME
+);
 
 const handleChange = (value: string | number) => {
   localValue.value = value;

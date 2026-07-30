@@ -5,7 +5,6 @@ import { useAuthStore } from '../auth';
 import { BASE_URL, DEFAULT_TIMEOUT } from './config';
 import { buildUrlWithParams } from './lib';
 import type {
-  IApiResponse,
   IDeleteParams,
   IGetParams,
   IPatchParams,
@@ -27,7 +26,7 @@ const api = {
     params,
     options = {},
     timeout = DEFAULT_TIMEOUT,
-  }: IRequestParams): Promise<IApiResponse<R>> {
+  }: IRequestParams): Promise<R> {
     const hasBody = isNotNil(options.body);
     const fullUrl = params
       ? `${BASE_URL}${buildUrlWithParams(url, params)}`
@@ -54,11 +53,8 @@ const api = {
         throw new Error((error as Error).message);
       }
 
-      const data: R = await response.json();
-      return {
-        data,
-        status: response.status,
-      };
+      const res: R = await response.json();
+      return res;
     } catch (error) {
       clearTimeout(timeoutId);
 
