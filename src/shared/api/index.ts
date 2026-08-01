@@ -6,6 +6,7 @@ export {
   useSignout,
   authApi,
   PASSWORD_MAX_CHARACTERS_COUNT,
+  useAuth,
   useAuthGuard,
   useAuthStore,
 } from './auth';

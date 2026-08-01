@@ -5,4 +5,6 @@ export {
   usePostCreate,
   usePostUpdate,
   usePostDelete,
+  useGetPostLike,
+  usePostSetLike,
 } from './queries';

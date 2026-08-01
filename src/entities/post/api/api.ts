@@ -21,7 +21,7 @@ const postApi = {
     });
   },
   createPost(data: IPostCreate) {
-    return api.post<IPostCreate, IPost>({
+    return api.post<IPostCreate, { id: string }>({
       url: '/posts',
       data,
     });
@@ -33,7 +33,7 @@ const postApi = {
     });
   },
   deletePost(postId: string) {
-    return api.delete<IPost>({
+    return api.delete<{ id: string }>({
       url: `/posts/${postId}`,
     });
   },
@@ -52,6 +52,20 @@ const postApi = {
       console.error(error);
       throw error;
     }
+  },
+  getPostLike(postId: string) {
+    return api.get<{ hasPostLike: boolean }>({
+      url: `/posts/${postId}/post-like`,
+    });
+  },
+  setLike({ postId, isLike }: { postId: string; isLike: boolean }) {
+    return isLike
+      ? api.post<{ id: string }, IPost>({
+          url: `/posts/${postId}/add-like`,
+        })
+      : api.delete<{ id: string }>({
+          url: `/posts/${postId}/remove-like`,
+        });
   },
 };
 

@@ -4,6 +4,7 @@ import { computed, type ComputedRef } from 'vue';
 import { DEFAULT_STALE_TIME } from '~/shared/config';
 
 import { queryKeys } from '../config';
+import { getOptimisticPost } from '../lib';
 import type { IGetPostListParams, IPost } from '../model';
 
 import { postApi } from './api';
@@ -38,10 +39,7 @@ const usePostCreate = () => {
       }>(queryKeys.list());
 
       if (postListCache) {
-        const optimisticPost = {
-          ...newPost,
-          isOptimistic: true,
-        };
+        const optimisticPost = getOptimisticPost(newPost);
         queryClient.setQueryData(queryKeys.list(), {
           ...postListCache,
           posts: [optimisticPost, ...postListCache.posts],
@@ -67,15 +65,20 @@ const usePostUpdate = () => {
           if (!oldPostListCache) return;
           return {
             ...oldPostListCache,
-            posts: oldPostListCache.posts.map((post: IPost) =>
+            posts: oldPostListCache.posts.map((post: IPost) => {
+              const optimisticPost = getOptimisticPost(updatedPost);
               // !post.status it means this post updates after creating
-              post.id === updatedPost.id || !post.status
-                ? { ...updatedPost, isOptimistic: true }
-                : post
-            ),
+              return post.id === updatedPost.id || !post.status
+                ? optimisticPost
+                : post;
+            }),
           };
         }
       );
+
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.post(updatedPost.id),
+      });
     },
     onSettled: () =>
       queryClient.invalidateQueries({ queryKey: queryKeys.list() }),
@@ -87,7 +90,7 @@ const usePostDelete = () => {
 
   return useMutation({
     mutationFn: postApi.deletePost,
-    onSuccess: (deletedPost) => {
+    onSuccess: ({ id: deletedPostId }) => {
       queryClient.setQueryData(
         queryKeys.list(),
         (oldPostListCache: { posts: IPost[] }) => {
@@ -95,12 +98,35 @@ const usePostDelete = () => {
           return {
             ...oldPostListCache,
             posts: oldPostListCache.posts.filter(
-              (post) => post.id !== deletedPost.id
+              (post) => post.id !== deletedPostId
             ),
           };
         }
       );
-      queryClient.removeQueries({ queryKey: queryKeys.post(deletedPost.id) });
+      queryClient.removeQueries({ queryKey: queryKeys.post(deletedPostId) });
+    },
+    onSettled: () =>
+      queryClient.invalidateQueries({ queryKey: queryKeys.list() }),
+  });
+};
+
+const useGetPostLike = (postId: string) => {
+  return useQuery({
+    queryFn: () => postApi.getPostLike(postId),
+    queryKey: queryKeys.postLike(postId),
+    enabled: Boolean(postId),
+    staleTime: DEFAULT_STALE_TIME,
+  });
+};
+
+const usePostSetLike = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: postApi.setLike,
+    onSuccess: ({ id }) => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.post(id) });
+      queryClient.invalidateQueries({ queryKey: queryKeys.postLike(id) });
     },
     onSettled: () =>
       queryClient.invalidateQueries({ queryKey: queryKeys.list() }),
@@ -113,4 +139,6 @@ export {
   usePostCreate,
   usePostUpdate,
   usePostDelete,
+  useGetPostLike,
+  usePostSetLike,
 };

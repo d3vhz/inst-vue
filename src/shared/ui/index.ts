@@ -13,7 +13,7 @@ export {
 export { Avatar, AvatarFallback, AvatarImage } from './avatar';
 export { Badge } from './badge';
 export { Breadcrumbs } from './breadcrumbs';
-export { Button } from './button';
+export { Button, type IButtonProps } from './button';
 export {
   Card,
   CardAction,

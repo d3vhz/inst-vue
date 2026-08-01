@@ -8,6 +8,7 @@ type IPost = {
   caption: string;
   status: IPostStatus;
   imgUrls: string[];
+  likes: number;
 };
 
 type IPostStatus = z.infer<typeof statusSchema>;
@@ -25,4 +26,9 @@ type SearchParams = {
 
 type IGetPostListParams = Partial<SearchParams>;
 
-export type { IPost, IPostCreate, IPostEdit, IGetPostListParams };
+type IPostLike = {
+  postId: string;
+  userId: string;
+};
+
+export type { IPost, IPostCreate, IPostEdit, IGetPostListParams, IPostLike };
