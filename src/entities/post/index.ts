@@ -4,8 +4,11 @@ export {
   usePostCreate,
   usePostUpdate,
   usePostDelete,
+  useGetPostLike,
+  usePostSetLike,
   postApi,
 } from './api';
+export { usePostLikeComposable } from './composables';
 export {
   imagesSchema,
   imgUrlsSchema,
@@ -24,3 +27,4 @@ export type {
   IPostEdit,
   IGetPostListParams,
 } from './model';
+export { LikeSaveActions } from './ui';

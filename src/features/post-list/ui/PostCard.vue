@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { type IPost } from '~/entities/post';
+import { type IPost, LikeSaveActions } from '~/entities/post';
+import { useAuth } from '~/shared/api';
 import { RouteName } from '~/shared/config';
 import {
   Badge,
@@ -15,6 +16,8 @@ import {
 } from '~/shared/ui';
 
 defineProps<{ post: IPost }>();
+
+const { hasAccess } = useAuth();
 </script>
 
 <template>
@@ -33,6 +36,7 @@ defineProps<{ post: IPost }>();
         </CarouselItem>
       </CarouselContent>
       <div class="space-y-2 p-2">
+        <LikeSaveActions :post="post" />
         <div class="flex items-center justify-between">
           <CarouselActions size="xs" />
           <Badge
@@ -45,23 +49,26 @@ defineProps<{ post: IPost }>();
           <small class="text-muted-foreground">{{ post.caption }}</small>
         </p>
 
-        <div class="space-x-2">
-          <RouterLink
-            :to="{
-              name: RouteName.PostShow,
-              params: { id: post.id },
-            }"
-          >
-            <Button size="sm" variant="secondary">Show</Button>
-          </RouterLink>
-          <RouterLink
-            :to="{
-              name: RouteName.PostEdit,
-              params: { id: post.id },
-            }"
-          >
-            <Button size="sm" variant="link">Edit</Button>
-          </RouterLink>
+        <div class="flex justify-between gap-4">
+          <div class="space-x-2">
+            <RouterLink
+              :to="{
+                name: RouteName.PostShow,
+                params: { id: post.id },
+              }"
+            >
+              <Button size="sm" variant="secondary">Show</Button>
+            </RouterLink>
+            <RouterLink
+              v-if="hasAccess(post.userId)"
+              :to="{
+                name: RouteName.PostEdit,
+                params: { id: post.id },
+              }"
+            >
+              <Button size="sm" variant="text-primary">Edit</Button>
+            </RouterLink>
+          </div>
         </div>
       </div>
     </Carousel>

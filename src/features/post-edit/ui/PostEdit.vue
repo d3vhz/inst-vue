@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Trash2Icon } from '@lucide/vue';
+import { useRouter } from 'vue-router';
 
 import { statusItems } from '~/entities/post';
-import { RouteName } from '~/shared/config';
 import {
   Button,
   Form,
@@ -26,12 +26,15 @@ const {
   onDeletePost,
   onEditPost,
 } = usePostEditComposable();
+
+const router = useRouter();
 </script>
 
 <template>
   <div class="py-4">
     <div v-if="isPending">...Loading</div>
     <div v-else-if="isError">Error: {{ error?.message }}</div>
+    <div v-else-if="!post">No data</div>
     <div v-else class="space-y-4">
       <div class="flex justify-between gap-4">
         <h3>Edit Post</h3>
@@ -50,14 +53,7 @@ const {
         />
         <SelectField name="status" label="Status" :items="statusItems" />
         <div class="space-x-4">
-          <RouterLink
-            :to="{
-              name: RouteName.PostShow,
-              params: { id: post?.id },
-            }"
-          >
-            <Button variant="muted">Cancel</Button>
-          </RouterLink>
+          <Button variant="muted" @click="router.go(-1)">Cancel</Button>
           <Button :disabled="isBtnDisabled" @click="onEditPost">
             Update
           </Button>

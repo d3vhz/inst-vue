@@ -4,6 +4,7 @@ import type { IGetPostListParams } from '../model';
 
 const queryKeys = {
   post: (id: string) => ['post', id],
+  postLike: (id: string) => ['post', 'post-like', id],
   list: (params?: IGetPostListParams) => ['post', 'list', params ?? {}],
 };
 

@@ -13,16 +13,11 @@ type IRequestParams = {
   timeout?: number;
 };
 
-type IGetParams = {
-  url: string;
-  params?: URLParams;
-  options?: RequestInit;
-  timeout?: number;
-};
+type IGetParams = IRequestParams;
 
 type IPostParams<T> = {
   url: string;
-  data: T;
+  data?: T;
   options?: RequestInit;
   timeout?: number;
 };

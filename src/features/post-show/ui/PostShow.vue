@@ -2,7 +2,8 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { useGetPost } from '~/entities/post';
+import { LikeSaveActions, useGetPost } from '~/entities/post';
+import { useAuth } from '~/shared/api';
 import { RouteName } from '~/shared/config';
 import {
   Button,
@@ -24,6 +25,8 @@ const { data, isPending, isError, error } = useGetPost(
 const post = computed(() => {
   return data.value;
 });
+
+const { hasAccess } = useAuth();
 </script>
 
 <template>
@@ -31,36 +34,40 @@ const post = computed(() => {
     <div v-if="isPending">...Loading</div>
     <div v-else-if="isError">Error: {{ error?.message }}</div>
     <div v-else-if="!post">No data</div>
-    <div v-else class="w-full space-y-4 xl:w-1/2">
-      <h3>Show Post</h3>
-      <Carousel>
-        <CarouselContent class="-ml-1">
-          <CarouselItem
-            v-for="(url, index) in post.imgUrls"
-            :key="url"
-            class="basis-1/2"
-          >
-            <ImageRoot>
-              <Image :src="url" :alt="`post-image-${index}`" />
-              <ImageFallback>Post Image</ImageFallback>
-            </ImageRoot>
-          </CarouselItem>
-        </CarouselContent>
-        <CarouselActions />
-      </Carousel>
-      <div>
+    <div v-else class="space-y-4">
+      <div class="flex justify-between gap-4">
+        <h3>Show Post</h3>
+      </div>
+      <div class="w-full space-y-4 lg:w-1/2 xl:w-1/3">
+        <Carousel>
+          <CarouselContent class="-ml-1">
+            <CarouselItem
+              v-for="(url, index) in post.imgUrls"
+              :key="url"
+              class="basis-full"
+            >
+              <ImageRoot>
+                <Image :src="url" :alt="`post-image-${index}`" />
+                <ImageFallback>Post Image</ImageFallback>
+              </ImageRoot>
+            </CarouselItem>
+          </CarouselContent>
+          <CarouselActions />
+        </Carousel>
+        <LikeSaveActions :post="post" />
         <p>
           <small>{{ post.caption }}</small>
         </p>
+        <RouterLink
+          v-if="hasAccess(post.userId)"
+          :to="{
+            name: RouteName.PostEdit,
+            params: { id: post.id },
+          }"
+        >
+          <Button>Edit</Button>
+        </RouterLink>
       </div>
-      <RouterLink
-        :to="{
-          name: RouteName.PostEdit,
-          params: { id: post.id },
-        }"
-      >
-        <Button>Edit</Button>
-      </RouterLink>
     </div>
   </div>
 </template>

@@ -3,4 +3,5 @@ export type {
   IPostCreate,
   IPostEdit,
   IGetPostListParams,
+  IPostLike,
 } from './types';

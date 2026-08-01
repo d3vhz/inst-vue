@@ -11,6 +11,7 @@ import {
   usePostDelete,
   usePostUpdate,
 } from '~/entities/post';
+import { useAuth } from '~/shared/api';
 import { RouteName, toastMessages } from '~/shared/config';
 import { parseError } from '~/shared/lib';
 
@@ -20,6 +21,7 @@ import type { IPostEditFormData } from '../model';
 export function usePostEditComposable() {
   const router = useRouter();
   const route = useRoute();
+  const { hasAccess } = useAuth();
 
   const {
     data,
@@ -44,14 +46,18 @@ export function usePostEditComposable() {
 
   watch(
     () => post.value,
-    (newPost) => {
-      if (!newPost) return;
+    (post) => {
+      if (!post || !hasAccess(post.userId)) {
+        router.push({ name: RouteName.PostList });
+
+        return;
+      }
 
       resetForm({
         values: {
-          imgUrls: newPost.imgUrls,
-          caption: newPost.caption,
-          status: newPost.status,
+          imgUrls: post.imgUrls,
+          caption: post.caption,
+          status: post.status,
         },
       });
     }
@@ -117,6 +123,7 @@ export function usePostEditComposable() {
     error,
     isDisabled,
     isBtnDisabled,
+    hasAccess,
     onDeletePost,
     onEditPost,
   };
