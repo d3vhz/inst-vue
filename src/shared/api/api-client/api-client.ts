@@ -25,18 +25,18 @@ const api = {
     url,
     params,
     options = {},
-    timeout = DEFAULT_TIMEOUT,
+    signal: externalSignal,
   }: IRequestParams): Promise<R> {
     const hasBody = isNotNil(options.body);
     const fullUrl = params
       ? `${BASE_URL}${buildUrlWithParams(url, params)}`
       : `${BASE_URL}${url}`;
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    const timeoutId = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT);
 
     const config = {
       ...options,
-      signal: controller.signal,
+      signal: externalSignal || controller.signal,
       headers: {
         ...(hasBody && { 'Content-Type': 'application/json' }),
         ...this.getAuthHeaders(),
@@ -59,7 +59,7 @@ const api = {
       clearTimeout(timeoutId);
 
       if ((error as Error).name === 'AbortError') {
-        throw new Error(`Timeout: request exceeded ${timeout}ms`, {
+        throw new Error(`Timeout: request exceeded ${DEFAULT_TIMEOUT}ms`, {
           cause: error,
         });
       }
@@ -68,16 +68,16 @@ const api = {
     }
   },
 
-  get<R>({ url, params, options = {}, timeout }: IGetParams) {
+  get<R>({ url, params, options = {}, signal }: IGetParams) {
     return this.request<R>({
       url,
       params,
       options: { ...options, method: 'GET' },
-      timeout,
+      signal,
     });
   },
 
-  post<T, R>({ url, data, options = {}, timeout }: IPostParams<T>) {
+  post<T, R>({ url, data, options = {} }: IPostParams<T>) {
     return this.request<R>({
       url,
       options: {
@@ -85,11 +85,10 @@ const api = {
         method: 'POST',
         body: JSON.stringify(data),
       },
-      timeout,
     });
   },
 
-  put<T, R>({ url, data, options = {}, timeout }: IPutParams<T>) {
+  put<T, R>({ url, data, options = {} }: IPutParams<T>) {
     return this.request<R>({
       url,
       options: {
@@ -97,11 +96,10 @@ const api = {
         method: 'PUT',
         body: JSON.stringify(data),
       },
-      timeout,
     });
   },
 
-  patch<T, R>({ url, data, options = {}, timeout }: IPatchParams<T>) {
+  patch<T, R>({ url, data, options = {} }: IPatchParams<T>) {
     return this.request<R>({
       url,
       options: {
@@ -109,19 +107,17 @@ const api = {
         method: 'PATCH',
         body: JSON.stringify(data),
       },
-      timeout,
     });
   },
 
-  delete<R>({ url, options = {}, timeout }: IDeleteParams) {
+  delete<R>({ url, options = {} }: IDeleteParams) {
     return this.request<R>({
       url,
       options: { ...options, method: 'DELETE' },
-      timeout,
     });
   },
 
-  upload<R>({ url, formData, options = {}, timeout }: IUploadParams) {
+  upload<R>({ url, formData, options = {} }: IUploadParams) {
     return this.request<R>({
       url,
       options: {
@@ -133,7 +129,6 @@ const api = {
           'Content-Type': 'multipart/form-data',
         },
       },
-      timeout,
     });
   },
 };

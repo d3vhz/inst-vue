@@ -10,7 +10,7 @@ type IRequestParams = {
   url: string;
   params?: URLParams;
   options?: RequestInit;
-  timeout?: number;
+  signal?: AbortSignal;
 };
 
 type IGetParams = IRequestParams;
@@ -19,7 +19,6 @@ type IPostParams<T> = {
   url: string;
   data?: T;
   options?: RequestInit;
-  timeout?: number;
 };
 
 type IPutParams<T> = IPostParams<T>;
@@ -32,7 +31,6 @@ type IUploadParams = {
   url: string;
   formData: FormData;
   options?: RequestInit;
-  timeout: number;
 };
 
 export type {
