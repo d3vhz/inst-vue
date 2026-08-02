@@ -13,7 +13,7 @@ export {
 export { Avatar, AvatarFallback, AvatarImage } from './avatar';
 export { Badge } from './badge';
 export { Breadcrumbs } from './breadcrumbs';
-export { Button, type IButtonProps } from './button';
+export { Button, ButtonSkeleton, type IButtonProps } from './button';
 export {
   Card,
   CardAction,
@@ -99,6 +99,7 @@ export {
   SidebarSeparator,
   SidebarTrigger,
 } from './sidebar';
+export { Skeleton } from './skeleton';
 export { Toaster } from './sonner';
 export { Spinner } from './spinner';
 export { Textarea } from './textarea';
