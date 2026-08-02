@@ -5,16 +5,12 @@ import { useRoute } from 'vue-router';
 
 import { DEFAULT_DEBOUNCE_TIME } from '~/shared/config';
 
-import {
-  InputGroup,
-  InputGroupInput,
-  SelectGroupInput,
-} from '../../input-group';
+import type { IInputProps } from '../../input';
+import { Input } from '../../input-group';
+import { type ISelectProps, Select } from '../../select';
 import { useQueryFilters } from '../composables';
 import { QUERY_FILTER_TYPE } from '../config';
 import type { IQueryFilterProps } from '../model';
-
-import ClearIcon from './ClearIcon.vue';
 
 const props = defineProps<IQueryFilterProps>();
 
@@ -39,7 +35,7 @@ const handleChange = (value: string | number) => {
 };
 
 watch(
-  () => queryValue,
+  () => queryValue.value,
   (newQueryValue) => {
     if (newQueryValue) return;
     localValue.value = '';
@@ -48,20 +44,16 @@ watch(
 </script>
 
 <template>
-  <InputGroup v-if="type === QUERY_FILTER_TYPE.Select" class="rounded-full">
-    <SelectGroupInput
-      v-bind="filterProps"
-      :model-value="localValue"
-      @update:model-value="handleChange"
-    />
-    <ClearIcon v-show="Boolean(localValue)" @clear="handleChange('')" />
-  </InputGroup>
-  <InputGroup v-else class="rounded-full">
-    <InputGroupInput
-      v-bind="filterProps"
-      :model-value="localValue"
-      @update:model-value="handleChange"
-    />
-    <ClearIcon v-show="Boolean(localValue)" @clear="handleChange('')" />
-  </InputGroup>
+  <Select
+    v-if="props.type === QUERY_FILTER_TYPE.Select"
+    v-bind="filterProps as ISelectProps"
+    :model-value="localValue"
+    @update:model-value="handleChange"
+  />
+  <Input
+    v-else
+    v-bind="filterProps as IInputProps"
+    :model-value="localValue"
+    @update:model-value="handleChange"
+  />
 </template>

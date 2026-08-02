@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ChevronDown } from '@lucide/vue';
+import { ChevronDown, XIcon } from '@lucide/vue';
 import { reactiveOmit } from '@vueuse/core';
 import { SelectIcon, SelectTrigger, useForwardProps } from 'reka-ui';
 
@@ -11,6 +11,10 @@ const props = withDefaults(defineProps<ISelectTriggerProps>(), {
   size: 'default',
   class: '',
 });
+
+const emits = defineEmits<{
+  (e: 'clear'): void;
+}>();
 
 const delegatedProps = reactiveOmit(props, 'class', 'size');
 const forwardedProps = useForwardProps(delegatedProps);
@@ -29,8 +33,18 @@ const forwardedProps = useForwardProps(delegatedProps);
     "
   >
     <slot />
-    <SelectIcon as-child>
-      <ChevronDown class="size-4 opacity-50" />
-    </SelectIcon>
+    <div class="flex items-center gap-2">
+      <button
+        v-show="props.clearable"
+        type="button"
+        class="cursor-pointer outline-0"
+        @pointerdown.stop="emits('clear')"
+      >
+        <XIcon class="size-4 opacity-50 hover:opacity-100" />
+      </button>
+      <SelectIcon as-child>
+        <ChevronDown class="size-4 opacity-50" />
+      </SelectIcon>
+    </div>
   </SelectTrigger>
 </template>

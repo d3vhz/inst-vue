@@ -1,15 +1,27 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue';
+import { useVModel } from '@vueuse/core';
 
 import { cn } from '~/shared/lib';
 
-import { Input } from '../../input';
+import { type IInputProps, Input } from '../../input';
 
-const props = defineProps<{ class?: HTMLAttributes['class'] }>();
+const props = defineProps<IInputProps>();
+
+const emits = defineEmits<{
+  (e: 'update:modelValue', payload: string | number): void;
+}>();
+
+const modelValue = useVModel(props, 'modelValue', emits, {
+  passive: true,
+  defaultValue: props.defaultValue,
+});
 </script>
 
 <template>
   <Input
+    v-model="modelValue"
+    :disabled="props.disabled"
+    :placeholder="props.placeholder"
     data-slot="input-group-control"
     :class="
       cn(
