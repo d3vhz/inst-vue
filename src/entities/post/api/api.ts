@@ -9,15 +9,23 @@ import type {
 } from '../model';
 
 const postApi = {
-  getPost(postId: string) {
+  getPost({ postId, signal }: { postId: string; signal?: AbortSignal }) {
     return api.get<IPost>({
       url: `/posts/${postId}`,
+      signal,
     });
   },
-  getPostList(params?: IGetPostListParams) {
+  getPostList({
+    params,
+    signal,
+  }: {
+    params?: IGetPostListParams;
+    signal?: AbortSignal;
+  }) {
     return api.get<{ posts: IPost[]; total: number }>({
       url: '/posts',
       params,
+      signal,
     });
   },
   createPost(data: IPostCreate) {
@@ -53,9 +61,10 @@ const postApi = {
       throw error;
     }
   },
-  getPostLike(postId: string) {
+  getPostLike({ postId, signal }: { postId: string; signal?: AbortSignal }) {
     return api.get<{ hasPostLike: boolean }>({
       url: `/posts/${postId}/post-like`,
+      signal,
     });
   },
   setLike({ postId, isLike }: { postId: string; isLike: boolean }) {

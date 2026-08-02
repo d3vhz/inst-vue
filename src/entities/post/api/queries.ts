@@ -11,7 +11,7 @@ import { postApi } from './api';
 
 const useGetPost = (postId: string) => {
   return useQuery({
-    queryFn: () => postApi.getPost(postId),
+    queryFn: ({ signal }) => postApi.getPost({ postId, signal }),
     queryKey: queryKeys.post(postId),
     enabled: Boolean(postId),
     staleTime: DEFAULT_STALE_TIME,
@@ -20,7 +20,8 @@ const useGetPost = (postId: string) => {
 
 const useGetPostList = (params?: ComputedRef<IGetPostListParams>) => {
   return useQuery({
-    queryFn: () => postApi.getPostList(params?.value),
+    queryFn: ({ signal }) =>
+      postApi.getPostList({ params: params?.value, signal }),
     queryKey: computed(() => queryKeys.list(params?.value)),
     staleTime: DEFAULT_STALE_TIME,
   });
@@ -112,7 +113,7 @@ const usePostDelete = () => {
 
 const useGetPostLike = (postId: string) => {
   return useQuery({
-    queryFn: () => postApi.getPostLike(postId),
+    queryFn: ({ signal }) => postApi.getPostLike({ postId, signal }),
     queryKey: queryKeys.postLike(postId),
     enabled: Boolean(postId),
     staleTime: DEFAULT_STALE_TIME,
@@ -124,6 +125,13 @@ const usePostSetLike = () => {
 
   return useMutation({
     mutationFn: postApi.setLike,
+    onMutate: ({ postId }) => {
+      queryClient.cancelQueries({ queryKey: queryKeys.post(postId) });
+      queryClient.cancelQueries({
+        queryKey: queryKeys.postLike(postId),
+      });
+      queryClient.cancelQueries({ queryKey: queryKeys.list() });
+    },
     onSuccess: ({ id }) => {
       queryClient.invalidateQueries({ queryKey: queryKeys.post(id) });
       queryClient.invalidateQueries({ queryKey: queryKeys.postLike(id) });
