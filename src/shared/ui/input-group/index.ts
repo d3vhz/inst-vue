@@ -1,9 +1,9 @@
 export {
+  Input,
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
   InputGroupText,
   InputGroupTextarea,
-  SelectGroupInput,
 } from './ui';

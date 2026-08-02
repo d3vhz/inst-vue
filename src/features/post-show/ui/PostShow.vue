@@ -38,7 +38,7 @@ const { hasAccess } = useAuth();
       <div class="flex justify-between gap-4">
         <h3>Show Post</h3>
       </div>
-      <div class="w-full space-y-4 lg:w-1/2 xl:w-1/3">
+      <div class="w-full lg:w-1/2 xl:w-1/3">
         <Carousel>
           <CarouselContent class="-ml-1">
             <CarouselItem
@@ -52,21 +52,23 @@ const { hasAccess } = useAuth();
               </ImageRoot>
             </CarouselItem>
           </CarouselContent>
-          <CarouselActions />
+          <div class="space-y-2 p-2">
+            <LikeSaveActions :post="post" />
+            <CarouselActions />
+            <p>
+              <small>{{ post.caption }}</small>
+            </p>
+            <RouterLink
+              v-if="hasAccess(post.userId)"
+              :to="{
+                name: RouteName.PostEdit,
+                params: { id: post.id },
+              }"
+            >
+              <Button>Edit</Button>
+            </RouterLink>
+          </div>
         </Carousel>
-        <LikeSaveActions :post="post" />
-        <p>
-          <small>{{ post.caption }}</small>
-        </p>
-        <RouterLink
-          v-if="hasAccess(post.userId)"
-          :to="{
-            name: RouteName.PostEdit,
-            params: { id: post.id },
-          }"
-        >
-          <Button>Edit</Button>
-        </RouterLink>
       </div>
     </div>
   </div>
