@@ -12,7 +12,7 @@ const props = withDefaults(
   }
 );
 
-const { likeCount, isLike, handleLike } = usePostLikeComposable(props.postId);
+const { likesCount, isLike, handleLike } = usePostLikeComposable(props.postId);
 </script>
 
 <template>
@@ -20,6 +20,6 @@ const { likeCount, isLike, handleLike } = usePostLikeComposable(props.postId);
     <Button variant="text-primary" :size="size" @click="handleLike">
       <HeartIcon :class="{ 'fill-primary': isLike }" />
     </Button>
-    {{ likeCount }}
+    {{ likesCount }}
   </div>
 </template>
