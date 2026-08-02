@@ -25,8 +25,10 @@ export function usePostLikeComposable(postId: string) {
   const handleDebouncedLike = useDebounceFn(onSetLike, DEFAULT_DEBOUNCE_TIME);
 
   const isLike = ref(false);
+  const likesCount = ref(0);
 
   const post = computed(() => postData.value);
+  const postLikes = computed(() => post.value?.likes ?? 0);
   const hasPostLike = computed(() => postLikeData.value?.hasPostLike);
 
   watch(
@@ -39,8 +41,19 @@ export function usePostLikeComposable(postId: string) {
     }
   );
 
+  watch(
+    () => postLikes.value,
+    (newValue) => {
+      likesCount.value = newValue ?? 0;
+    },
+    {
+      immediate: true,
+    }
+  );
+
   const handleLike = () => {
     isLike.value = !isLike.value;
+    likesCount.value += isLike.value ? 1 : -1;
     handleDebouncedLike({ postId: postId, isLike: isLike.value });
   };
 
@@ -48,8 +61,8 @@ export function usePostLikeComposable(postId: string) {
     isGetPostPending || isGetPostLikePending || isPostSetLikePending;
 
   return {
-    likeCount: computed(() => post.value?.likes ?? 0),
-    isLike,
+    likesCount: computed(() => likesCount.value),
+    isLike: computed(() => isLike.value),
     isPending,
     handleLike,
   };
