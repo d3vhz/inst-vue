@@ -7,4 +7,6 @@ export {
   usePostDelete,
   useGetPostLike,
   usePostSetLike,
+  useGetPostSave,
+  usePostSetSave,
 } from './queries';

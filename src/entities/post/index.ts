@@ -6,6 +6,8 @@ export {
   usePostDelete,
   useGetPostLike,
   usePostSetLike,
+  useGetPostSave,
+  usePostSetSave,
   postApi,
 } from './api';
 export { usePostLikeComposable } from './composables';

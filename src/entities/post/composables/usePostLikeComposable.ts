@@ -8,14 +8,20 @@ import { parseError } from '~/shared/lib';
 import { useGetPost, useGetPostLike, usePostSetLike } from '../api';
 
 export function usePostLikeComposable(postId: string) {
+  const isLiked = ref(false);
+  const likesCount = ref(0);
+
   const { data: postData, isPending: isGetPostPending } = useGetPost(postId);
   const { data: postLikeData, isPending: isGetPostLikePending } =
     useGetPostLike(postId);
   const { mutateAsync: setLike } = usePostSetLike();
 
-  const onSetLike = (data: { postId: string; isLike: boolean }) => {
+  const postLikes = computed(() => postData.value?.likes ?? 0);
+  const hasPostLike = computed(() => postLikeData.value?.hasPostLike);
+
+  const onSetLike = () => {
     try {
-      setLike(data);
+      setLike({ postId: postId, isLike: isLiked.value });
     } catch (error) {
       toast.error(parseError(error));
     }
@@ -23,17 +29,16 @@ export function usePostLikeComposable(postId: string) {
 
   const handleDebouncedLike = useDebounceFn(onSetLike, DEFAULT_DEBOUNCE_TIME);
 
-  const isLike = ref(false);
-  const likesCount = ref(0);
-
-  const post = computed(() => postData.value);
-  const postLikes = computed(() => post.value?.likes ?? 0);
-  const hasPostLike = computed(() => postLikeData.value?.hasPostLike);
+  const handleLike = () => {
+    isLiked.value = !isLiked.value;
+    likesCount.value += isLiked.value ? 1 : -1;
+    handleDebouncedLike();
+  };
 
   watch(
     () => hasPostLike.value,
     (newValue) => {
-      isLike.value = Boolean(newValue);
+      isLiked.value = Boolean(newValue);
     },
     {
       immediate: true,
@@ -50,17 +55,11 @@ export function usePostLikeComposable(postId: string) {
     }
   );
 
-  const handleLike = () => {
-    isLike.value = !isLike.value;
-    likesCount.value += isLike.value ? 1 : -1;
-    handleDebouncedLike({ postId: postId, isLike: isLike.value });
-  };
-
   const isPending = isGetPostPending || isGetPostLikePending;
 
   return {
     likesCount: computed(() => likesCount.value),
-    isLike: computed(() => isLike.value),
+    isLiked: computed(() => isLiked.value),
     isPending,
     handleLike,
   };

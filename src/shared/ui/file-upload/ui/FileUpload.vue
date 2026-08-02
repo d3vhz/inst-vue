@@ -67,7 +67,7 @@ const onChangeFiles = (event: Event) => {
     <Button :disabled="disabled" size="xs" variant="muted" @click="clearFiles">
       Clear all
     </Button>
-    <Carousel>
+    <Carousel class="space-y-4">
       <CarouselContent class="-ml-1">
         <CarouselItem
           v-for="({ name, size, blobUrl }, index) in files"
