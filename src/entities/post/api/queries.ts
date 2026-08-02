@@ -141,6 +141,31 @@ const usePostSetLike = () => {
   });
 };
 
+const useGetPostSave = (postId: string) => {
+  return useQuery({
+    queryFn: ({ signal }) => postApi.getPostSave({ postId, signal }),
+    queryKey: queryKeys.postSave(postId),
+    enabled: Boolean(postId),
+    staleTime: DEFAULT_STALE_TIME,
+  });
+};
+
+const usePostSetSave = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: postApi.setSave,
+    onMutate: ({ postId }) => {
+      queryClient.cancelQueries({
+        queryKey: queryKeys.postSave(postId),
+      });
+    },
+    onSuccess: ({ id }) => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.postSave(id) });
+    },
+  });
+};
+
 export {
   useGetPost,
   useGetPostList,
@@ -149,4 +174,6 @@ export {
   usePostDelete,
   useGetPostLike,
   usePostSetLike,
+  useGetPostSave,
+  usePostSetSave,
 };

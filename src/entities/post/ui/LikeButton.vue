@@ -14,7 +14,7 @@ const props = withDefaults(
   }
 );
 
-const { likesCount, isLike, handleLike, isPending } = usePostLikeComposable(
+const { likesCount, isPending, isLiked, handleLike } = usePostLikeComposable(
   props.postId
 );
 </script>
@@ -23,7 +23,7 @@ const { likesCount, isLike, handleLike, isPending } = usePostLikeComposable(
   <LikeButtonSkeleton v-if="isPending" :size="size" />
   <div v-else class="flex items-center gap-1">
     <Button variant="primary-text" :size="size" @click="handleLike">
-      <HeartIcon :class="{ 'fill-primary': isLike }" />
+      <HeartIcon :class="{ 'fill-primary': isLiked }" />
     </Button>
     {{ likesCount }}
   </div>

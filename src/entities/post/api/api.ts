@@ -76,6 +76,21 @@ const postApi = {
           url: `/posts/${postId}/remove-like`,
         });
   },
+  getPostSave({ postId, signal }: { postId: string; signal?: AbortSignal }) {
+    return api.get<{ hasPostSave: boolean }>({
+      url: `/posts/${postId}/post-save`,
+      signal,
+    });
+  },
+  setSave({ postId, isSave }: { postId: string; isSave: boolean }) {
+    return isSave
+      ? api.post<{ id: string }, IPost>({
+          url: `/posts/${postId}/add-save`,
+        })
+      : api.delete<{ id: string }>({
+          url: `/posts/${postId}/remove-save`,
+        });
+  },
 };
 
 export { postApi };
