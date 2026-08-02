@@ -11,8 +11,7 @@ export function usePostLikeComposable(postId: string) {
   const { data: postData, isPending: isGetPostPending } = useGetPost(postId);
   const { data: postLikeData, isPending: isGetPostLikePending } =
     useGetPostLike(postId);
-  const { mutateAsync: setLike, isPending: isPostSetLikePending } =
-    usePostSetLike();
+  const { mutateAsync: setLike } = usePostSetLike();
 
   const onSetLike = (data: { postId: string; isLike: boolean }) => {
     try {
@@ -57,8 +56,7 @@ export function usePostLikeComposable(postId: string) {
     handleDebouncedLike({ postId: postId, isLike: isLike.value });
   };
 
-  const isPending =
-    isGetPostPending || isGetPostLikePending || isPostSetLikePending;
+  const isPending = isGetPostPending || isGetPostLikePending;
 
   return {
     likesCount: computed(() => likesCount.value),

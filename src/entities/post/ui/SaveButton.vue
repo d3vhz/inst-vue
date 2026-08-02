@@ -9,7 +9,7 @@ withDefaults(defineProps<{ postId: string; size?: IButtonProps['size'] }>(), {
 </script>
 
 <template>
-  <Button disabled variant="text-primary" :size="size">
+  <Button disabled variant="primary-text" :size="size">
     <BookmarkIcon />
   </Button>
 </template>

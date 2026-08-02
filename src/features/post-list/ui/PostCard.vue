@@ -66,7 +66,7 @@ const { hasAccess } = useAuth();
                 params: { id: post.id },
               }"
             >
-              <Button size="sm" variant="text-primary">Edit</Button>
+              <Button size="sm" variant="primary-text">Edit</Button>
             </RouterLink>
           </div>
         </div>

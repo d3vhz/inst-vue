@@ -13,6 +13,8 @@ const props = defineProps<SkeletonProps>();
 <template>
   <div
     data-slot="skeleton"
-    :class="cn('bg-primary/10 animate-pulse rounded-md', props.class)"
-  />
+    :class="cn('bg-muted/40 animate-pulse rounded-md', props.class)"
+  >
+    <slot v-if="$slots.default" />
+  </div>
 </template>
