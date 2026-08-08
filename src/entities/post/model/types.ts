@@ -1,5 +1,7 @@
 import type z from 'zod';
 
+import type { IUser } from '~/entities/user';
+
 import type { statusSchema } from '../config';
 
 type IPost = {
@@ -9,6 +11,11 @@ type IPost = {
   status: IPostStatus;
   imgUrls: string[];
   likes: number;
+  likedByUser: boolean;
+  savedByUser: boolean;
+  user: IUser;
+  createdAt: string;
+  updatedAt: string;
 };
 
 type IPostStatus = z.infer<typeof statusSchema>;
@@ -22,6 +29,7 @@ type SearchParams = {
   page: string;
   limit: string;
   status: IPostStatus;
+  userId: string;
 };
 
 type IGetPostListParams = Partial<SearchParams>;

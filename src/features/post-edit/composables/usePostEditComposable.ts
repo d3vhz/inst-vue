@@ -21,14 +21,16 @@ import type { IPostEditFormData } from '../model';
 export function usePostEditComposable() {
   const router = useRouter();
   const route = useRoute();
-  const { hasAccess } = useAuth();
+  const { isCurrentUser } = useAuth();
+
+  const postId = computed(() => route.params.id as string);
 
   const {
     data,
     isPending: isGetPostPending,
     isError: isGetPostError,
     error: getPostError,
-  } = useGetPost(route.params.id as string);
+  } = useGetPost(postId);
 
   const post = computed(() => {
     return data.value;
@@ -47,8 +49,8 @@ export function usePostEditComposable() {
   watch(
     () => post.value,
     (post) => {
-      if (!post || !hasAccess(post.userId)) {
-        router.push({ name: RouteName.PostList });
+      if (!post || !isCurrentUser(post.userId)) {
+        router.push({ name: RouteName.Feed });
 
         return;
       }
@@ -77,7 +79,7 @@ export function usePostEditComposable() {
         await postApi.deleteFiles(post.value.imgUrls);
       }
       toast.success(toastMessages.post.delete);
-      router.push({ name: RouteName.PostList });
+      router.push({ name: RouteName.Feed });
     } catch (error) {
       toast.error(parseError(error));
     }
@@ -96,7 +98,7 @@ export function usePostEditComposable() {
       }
       resetForm();
       toast.success(toastMessages.post.update);
-      router.push({ name: RouteName.PostList });
+      router.push({ name: RouteName.Feed });
     } catch (error) {
       toast.error(parseError(error));
     }
@@ -123,7 +125,7 @@ export function usePostEditComposable() {
     error,
     isDisabled,
     isBtnDisabled,
-    hasAccess,
+    isCurrentUser,
     onDeletePost,
     onEditPost,
   };

@@ -9,6 +9,7 @@ type ISelectProps = {
   placeholder?: string;
   items: ISelectItem[];
   disabled?: boolean;
+  clearable?: boolean;
 };
 
 export type { ISelectProps };

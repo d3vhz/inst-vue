@@ -24,13 +24,20 @@ const [useProvideCarousel, useInjectCarousel] = createInjectionState(
     function scrollNext() {
       emblaApi.value?.scrollNext();
     }
+    function scrollTo(index: number) {
+      emblaApi.value?.scrollTo(index);
+    }
 
     const canScrollNext = ref(false);
     const canScrollPrev = ref(false);
+    const scrollSnaps = ref<number[]>([]);
+    const selectedSnap = ref(0);
 
     function onSelect(api: CarouselApi) {
       canScrollNext.value = api?.canScrollNext() || false;
       canScrollPrev.value = api?.canScrollPrev() || false;
+      scrollSnaps.value = api?.scrollSnapList() ?? [];
+      selectedSnap.value = api?.selectedScrollSnap() ?? 0;
     }
 
     onMounted(() => {
@@ -50,6 +57,9 @@ const [useProvideCarousel, useInjectCarousel] = createInjectionState(
       canScrollNext,
       scrollPrev,
       scrollNext,
+      scrollTo,
+      scrollSnaps,
+      selectedSnap,
       orientation,
     };
   }

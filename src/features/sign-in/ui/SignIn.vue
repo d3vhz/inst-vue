@@ -25,7 +25,7 @@ const onSubmit = handleSubmit(async ({ email, password }) => {
     await signIn({ email, password });
     resetForm();
     toast.success(toastMessages.auth.signIn);
-    router.push({ name: RouteName.PostList });
+    router.push({ name: RouteName.Feed });
   } catch (error) {
     toast.error(parseError(error));
   }

@@ -13,7 +13,7 @@ withDefaults(defineProps<{ post: IPost; size?: IButtonProps['size'] }>(), {
 
 <template>
   <div class="flex justify-between gap-2">
-    <SaveButton :post-id="post.id" :size="size" />
-    <LikeButton :post-id="post.id" :size="size" />
+    <LikeButton :post="post" :size="size" />
+    <SaveButton :post="post" :size="size" />
   </div>
 </template>

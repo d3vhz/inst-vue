@@ -13,7 +13,7 @@ const { breadcrumbs } = useBreadcrumbs();
 </script>
 
 <template>
-  <Breadcrumb v-if="breadcrumbs.length">
+  <Breadcrumb v-if="breadcrumbs.length > 1">
     <BreadcrumbList>
       <BreadcrumbItem>
         <template

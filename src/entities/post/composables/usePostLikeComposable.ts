@@ -1,27 +1,23 @@
 import { useDebounceFn } from '@vueuse/core';
-import { computed, ref, watch } from 'vue';
+import { computed, type ComputedRef, ref, watch } from 'vue';
 import { toast } from 'vue-sonner';
 
 import { DEFAULT_DEBOUNCE_TIME } from '~/shared/config';
 import { parseError } from '~/shared/lib';
 
-import { useGetPost, useGetPostLike, usePostSetLike } from '../api';
+import { usePostSetLike } from '../api';
+import type { IPost } from '../model';
 
-export function usePostLikeComposable(postId: string) {
-  const isLiked = ref(false);
-  const likesCount = ref(0);
+export function usePostLikeComposable(post: ComputedRef<IPost>) {
+  const isLiked = ref(post.value.likedByUser);
+  const likesCount = ref(post.value.likes);
 
-  const { data: postData, isPending: isGetPostPending } = useGetPost(postId);
-  const { data: postLikeData, isPending: isGetPostLikePending } =
-    useGetPostLike(postId);
-  const { mutateAsync: setLike } = usePostSetLike();
+  const { mutateAsync: setLike, isPending: isPostSetLikePending } =
+    usePostSetLike();
 
-  const postLikes = computed(() => postData.value?.likes ?? 0);
-  const hasPostLike = computed(() => postLikeData.value?.hasPostLike);
-
-  const onSetLike = () => {
+  const onSetLike = async () => {
     try {
-      setLike({ postId: postId, isLike: isLiked.value });
+      await setLike({ postId: post.value.id, isLiked: isLiked.value });
     } catch (error) {
       toast.error(parseError(error));
     }
@@ -36,26 +32,14 @@ export function usePostLikeComposable(postId: string) {
   };
 
   watch(
-    () => hasPostLike.value,
-    (newValue) => {
-      isLiked.value = Boolean(newValue);
-    },
-    {
-      immediate: true,
+    () => post.value,
+    (newPost) => {
+      isLiked.value = newPost.likedByUser;
+      likesCount.value = newPost.likes;
     }
   );
 
-  watch(
-    () => postLikes.value,
-    (newValue) => {
-      likesCount.value = newValue ?? 0;
-    },
-    {
-      immediate: true,
-    }
-  );
-
-  const isPending = isGetPostPending || isGetPostLikePending;
+  const isPending = isPostSetLikePending;
 
   return {
     likesCount: computed(() => likesCount.value),

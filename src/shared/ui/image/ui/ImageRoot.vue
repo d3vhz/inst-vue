@@ -18,7 +18,7 @@ export const [injectImageRootContext, provideImageRootContext] =
 import { ref } from 'vue';
 
 const props = withDefaults(defineProps<IImageRootProps>(), {
-  as: 'span',
+  as: 'div',
 });
 
 useForwardExpose();
@@ -32,7 +32,12 @@ provideImageRootContext({
   <Primitive
     :as-child="asChild"
     :as="as"
-    :class="cn('relative size-full object-cover', props.class)"
+    :class="
+      cn(
+        'relative size-full overflow-hidden rounded-md object-cover',
+        props.class
+      )
+    "
   >
     <slot />
   </Primitive>

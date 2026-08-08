@@ -13,6 +13,8 @@ type IUser = {
   firstName: string | null;
   lastName: string | null;
   roles: IRole[];
+  createdAt: string;
+  updatedAt: string;
 };
 
 type IUserEdit = Partial<Pick<IUser, 'firstName' | 'lastName'>>;

@@ -12,7 +12,7 @@ const emit = defineEmits<{ (event: 'delete-post'): void }>();
 
 <template>
   <Popover>
-    <PopoverTrigger>
+    <PopoverTrigger as-child>
       <slot />
     </PopoverTrigger>
     <PopoverContent :side-offset="10">

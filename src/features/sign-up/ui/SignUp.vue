@@ -26,7 +26,7 @@ const onSubmit = handleSubmit(async ({ email, password }) => {
     resetForm();
     toast.success(toastMessages.auth.signUp);
     router.push({
-      name: RouteName.UserEdit,
+      name: RouteName.ProfileEdit,
       params: {
         id: data.user?.id,
       },

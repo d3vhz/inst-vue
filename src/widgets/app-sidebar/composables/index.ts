@@ -1,1 +1,1 @@
-export { useUserDropdownItems } from './useUserDropdownItems';
+export { useAppSidebar } from './useAppSidebar';

@@ -7,4 +7,5 @@ export type {
   IRouteName,
   IRouteMeta,
   IBreadcrumb,
+  MaybeRef,
 } from './types';

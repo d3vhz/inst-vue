@@ -1,12 +1,18 @@
 import { pascalCase } from 'es-toolkit/string';
 
+import type { MaybeRef } from '~/shared/model';
+
 import type { IGetPostListParams } from '../model';
 
 const queryKeys = {
-  post: (id: string) => ['post', id],
-  postLike: (id: string) => ['post', 'post-like', id],
-  postSave: (id: string) => ['post', 'post-save', id],
-  list: (params?: IGetPostListParams) => ['post', 'list', params ?? {}],
+  post: (id: MaybeRef<string>) => ['post', id],
+  postLike: (id: MaybeRef<string>) => ['post', 'post-like', id],
+  postSave: (id: MaybeRef<string>) => ['post', 'post-save', id],
+  list: (params?: MaybeRef<IGetPostListParams>) => [
+    'post',
+    'list',
+    params ?? {},
+  ],
 };
 
 const STATUSES = ['active', 'archived'] as const;

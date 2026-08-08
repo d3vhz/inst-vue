@@ -17,9 +17,9 @@ import {
 import { Button } from '../../button';
 import {
   Carousel,
-  CarouselActions,
   CarouselContent,
   CarouselItem,
+  CarouselPrevNextButtons,
 } from '../../carousel';
 import { Image, ImageFallback, ImageRoot } from '../../image';
 import { Input } from '../../input';
@@ -68,7 +68,7 @@ const onChangeFiles = (event: Event) => {
       Clear all
     </Button>
     <Carousel class="space-y-4">
-      <CarouselContent class="-ml-1">
+      <CarouselContent>
         <CarouselItem
           v-for="({ name, size, blobUrl }, index) in files"
           :key="name"
@@ -99,7 +99,7 @@ const onChangeFiles = (event: Event) => {
           </Attachment>
         </CarouselItem>
       </CarouselContent>
-      <CarouselActions />
+      <CarouselPrevNextButtons />
     </Carousel>
   </div>
   <div v-else class="flex">

@@ -6,14 +6,11 @@ import type { IRouteName } from '~/shared/model';
 type IMenuItem = {
   title: string;
   routeName: IRouteName;
-  icon: LucideIcon;
+  routeParams?: RouteParamsGeneric;
+  icon?: LucideIcon;
+  disabled?: boolean;
 };
 
-type IUserDropdownMenuItem = {
-  title: string;
-  routeName: IRouteName;
-  disabled?: boolean;
-  routeParams?: RouteParamsGeneric;
-};
+type IUserDropdownMenuItem = IMenuItem;
 
 export type { IMenuItem, IUserDropdownMenuItem };

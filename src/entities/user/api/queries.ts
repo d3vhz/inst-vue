@@ -1,16 +1,20 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query';
+import type { ComputedRef } from 'vue';
+
+import { DEFAULT_GC_TIME, DEFAULT_STALE_TIME } from '~/shared/config';
 
 import { queryKeys } from '../config';
 import type { IUser } from '../model';
 
 import { userApi } from './api';
 
-const useGetUser = (userId: string) => {
+const useGetUser = (userId: ComputedRef<string>) => {
   return useQuery({
-    queryFn: () => userApi.getUser(userId),
+    queryFn: () => userApi.getUser(userId.value),
     queryKey: queryKeys.user(userId),
     enabled: Boolean(userId),
-    staleTime: Infinity,
+    staleTime: DEFAULT_STALE_TIME,
+    gcTime: DEFAULT_GC_TIME,
   });
 };
 

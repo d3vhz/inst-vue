@@ -4,7 +4,6 @@ import { RouterLink } from 'vue-router';
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -13,9 +12,9 @@ import {
   SidebarMenuItem,
 } from '~/shared/ui';
 
-import { menuItems } from '../config';
+import { useAppSidebar } from '../composables';
 
-import UserDropdownMenu from './UserDropdownMenu.vue';
+const { menuItems } = useAppSidebar();
 </script>
 
 <template>
@@ -26,13 +25,13 @@ import UserDropdownMenu from './UserDropdownMenu.vue';
         <SidebarGroupContent>
           <SidebarMenu>
             <SidebarMenuItem
-              v-for="{ title, routeName, icon } in menuItems"
+              v-for="{ title, routeName, routeParams, icon } in menuItems"
               :key="title"
             >
               <SidebarMenuButton as-child :tooltip="title">
                 <RouterLink
                   exact-active-class="text-primary"
-                  :to="{ name: routeName }"
+                  :to="{ name: routeName, params: routeParams }"
                 >
                   <component :is="icon" />
                   <span>{{ title }}</span>
@@ -43,12 +42,5 @@ import UserDropdownMenu from './UserDropdownMenu.vue';
         </SidebarGroupContent>
       </SidebarGroup>
     </SidebarContent>
-    <SidebarFooter>
-      <SidebarMenu>
-        <SidebarMenuItem>
-          <UserDropdownMenu />
-        </SidebarMenuItem>
-      </SidebarMenu>
-    </SidebarFooter>
   </Sidebar>
 </template>

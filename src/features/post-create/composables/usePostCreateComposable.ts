@@ -43,7 +43,7 @@ export function usePostCreateComposable() {
       await postUpdate({ id: post.id, data: { imgUrls } });
       resetForm();
       toast.success(toastMessages.post.create);
-      router.push({ name: RouteName.PostList });
+      router.push({ name: RouteName.Feed });
     } catch (error) {
       toast.error(parseError(error));
     }
