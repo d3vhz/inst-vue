@@ -20,7 +20,7 @@ const { carouselRef, orientation } = useCarousel();
       :class="
         cn(
           'flex',
-          orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
+          orientation === 'horizontal' ? '-ml-2' : '-mt-2 flex-col',
           props.class
         )
       "

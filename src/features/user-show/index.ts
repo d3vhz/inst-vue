@@ -1,1 +1,0 @@
-export { UserShow } from './ui';

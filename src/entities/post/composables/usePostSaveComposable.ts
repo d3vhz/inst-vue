@@ -1,24 +1,22 @@
 import { useDebounceFn } from '@vueuse/core';
-import { computed, ref, watch } from 'vue';
+import { computed, type ComputedRef, ref, watch } from 'vue';
 import { toast } from 'vue-sonner';
 
 import { DEFAULT_DEBOUNCE_TIME } from '~/shared/config';
 import { parseError } from '~/shared/lib';
 
-import { useGetPostSave, usePostSetSave } from '../api';
+import { usePostSetSave } from '../api';
+import type { IPost } from '../model';
 
-export function usePostSaveComposable(postId: string) {
-  const isSaved = ref(false);
+export function usePostSaveComposable(post: ComputedRef<IPost>) {
+  const isSaved = ref(post.value.savedByUser);
 
-  const { data: postSaveData, isPending: isGetPostSavePending } =
-    useGetPostSave(postId);
-  const { mutateAsync: setSave } = usePostSetSave();
+  const { mutateAsync: setSave, isPending: isPostSetSavePending } =
+    usePostSetSave();
 
-  const hasPostSave = computed(() => postSaveData.value?.hasPostSave);
-
-  const onSetSave = () => {
+  const onSetSave = async () => {
     try {
-      setSave({ postId: postId, isSave: isSaved.value });
+      await setSave({ postId: post.value.id, isSaved: isSaved.value });
     } catch (error) {
       toast.error(parseError(error));
     }
@@ -32,16 +30,13 @@ export function usePostSaveComposable(postId: string) {
   };
 
   watch(
-    () => hasPostSave.value,
+    () => post.value.savedByUser,
     (newValue) => {
-      isSaved.value = Boolean(newValue);
-    },
-    {
-      immediate: true,
+      isSaved.value = newValue;
     }
   );
 
-  const isPending = isGetPostSavePending;
+  const isPending = isPostSetSavePending;
 
   return {
     isSaved: computed(() => isSaved.value),

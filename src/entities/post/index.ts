@@ -4,9 +4,7 @@ export {
   usePostCreate,
   usePostUpdate,
   usePostDelete,
-  useGetPostLike,
   usePostSetLike,
-  useGetPostSave,
   usePostSetSave,
   postApi,
 } from './api';
@@ -29,4 +27,4 @@ export type {
   IPostEdit,
   IGetPostListParams,
 } from './model';
-export { LikeSaveActions } from './ui';
+export { LikeSaveActions, PostCard } from './ui';

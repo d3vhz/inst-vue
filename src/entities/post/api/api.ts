@@ -61,14 +61,8 @@ const postApi = {
       throw error;
     }
   },
-  getPostLike({ postId, signal }: { postId: string; signal?: AbortSignal }) {
-    return api.get<{ hasPostLike: boolean }>({
-      url: `/posts/${postId}/post-like`,
-      signal,
-    });
-  },
-  setLike({ postId, isLike }: { postId: string; isLike: boolean }) {
-    return isLike
+  setLike({ postId, isLiked }: { postId: string; isLiked: boolean }) {
+    return isLiked
       ? api.post<{ id: string }, IPost>({
           url: `/posts/${postId}/add-like`,
         })
@@ -76,14 +70,8 @@ const postApi = {
           url: `/posts/${postId}/remove-like`,
         });
   },
-  getPostSave({ postId, signal }: { postId: string; signal?: AbortSignal }) {
-    return api.get<{ hasPostSave: boolean }>({
-      url: `/posts/${postId}/post-save`,
-      signal,
-    });
-  },
-  setSave({ postId, isSave }: { postId: string; isSave: boolean }) {
-    return isSave
+  setSave({ postId, isSaved }: { postId: string; isSaved: boolean }) {
+    return isSaved
       ? api.post<{ id: string }, IPost>({
           url: `/posts/${postId}/add-save`,
         })

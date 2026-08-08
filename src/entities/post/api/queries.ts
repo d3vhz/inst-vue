@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query';
-import { computed, type ComputedRef } from 'vue';
+import { type ComputedRef } from 'vue';
 
-import { DEFAULT_STALE_TIME } from '~/shared/config';
+import { DEFAULT_GC_TIME, DEFAULT_STALE_TIME } from '~/shared/config';
 
 import { queryKeys } from '../config';
 import { getOptimisticPost } from '../lib';
@@ -9,12 +9,13 @@ import type { IGetPostListParams, IPost } from '../model';
 
 import { postApi } from './api';
 
-const useGetPost = (postId: string) => {
+const useGetPost = (postId: ComputedRef<string>) => {
   return useQuery({
-    queryFn: ({ signal }) => postApi.getPost({ postId, signal }),
+    queryFn: ({ signal }) => postApi.getPost({ postId: postId.value, signal }),
     queryKey: queryKeys.post(postId),
     enabled: Boolean(postId),
     staleTime: DEFAULT_STALE_TIME,
+    gcTime: DEFAULT_GC_TIME,
   });
 };
 
@@ -22,8 +23,9 @@ const useGetPostList = (params?: ComputedRef<IGetPostListParams>) => {
   return useQuery({
     queryFn: ({ signal }) =>
       postApi.getPostList({ params: params?.value, signal }),
-    queryKey: computed(() => queryKeys.list(params?.value)),
+    queryKey: queryKeys.list(params),
     staleTime: DEFAULT_STALE_TIME,
+    gcTime: DEFAULT_GC_TIME,
   });
 };
 
@@ -111,42 +113,19 @@ const usePostDelete = () => {
   });
 };
 
-const useGetPostLike = (postId: string) => {
-  return useQuery({
-    queryFn: ({ signal }) => postApi.getPostLike({ postId, signal }),
-    queryKey: queryKeys.postLike(postId),
-    enabled: Boolean(postId),
-    staleTime: DEFAULT_STALE_TIME,
-  });
-};
-
 const usePostSetLike = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: postApi.setLike,
     onMutate: ({ postId }) => {
-      queryClient.cancelQueries({ queryKey: queryKeys.post(postId) });
-      queryClient.cancelQueries({
-        queryKey: queryKeys.postLike(postId),
-      });
       queryClient.cancelQueries({ queryKey: queryKeys.list() });
+      queryClient.cancelQueries({ queryKey: queryKeys.post(postId) });
     },
-    onSuccess: ({ id }) => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.post(id) });
-      queryClient.invalidateQueries({ queryKey: queryKeys.postLike(id) });
-    },
+    onSuccess: ({ id }) =>
+      queryClient.invalidateQueries({ queryKey: queryKeys.post(id) }),
     onSettled: () =>
       queryClient.invalidateQueries({ queryKey: queryKeys.list() }),
-  });
-};
-
-const useGetPostSave = (postId: string) => {
-  return useQuery({
-    queryFn: ({ signal }) => postApi.getPostSave({ postId, signal }),
-    queryKey: queryKeys.postSave(postId),
-    enabled: Boolean(postId),
-    staleTime: DEFAULT_STALE_TIME,
   });
 };
 
@@ -156,13 +135,13 @@ const usePostSetSave = () => {
   return useMutation({
     mutationFn: postApi.setSave,
     onMutate: ({ postId }) => {
-      queryClient.cancelQueries({
-        queryKey: queryKeys.postSave(postId),
-      });
+      queryClient.cancelQueries({ queryKey: queryKeys.list() });
+      queryClient.cancelQueries({ queryKey: queryKeys.post(postId) });
     },
-    onSuccess: ({ id }) => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.postSave(id) });
-    },
+    onSuccess: ({ id }) =>
+      queryClient.invalidateQueries({ queryKey: queryKeys.post(id) }),
+    onSettled: () =>
+      queryClient.invalidateQueries({ queryKey: queryKeys.list() }),
   });
 };
 
@@ -172,8 +151,6 @@ export {
   usePostCreate,
   usePostUpdate,
   usePostDelete,
-  useGetPostLike,
   usePostSetLike,
-  useGetPostSave,
   usePostSetSave,
 };

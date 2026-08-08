@@ -15,7 +15,7 @@ const authGuard: NavigationGuard = async (to) => {
   }
 
   if (isAuthenticated && isAuthRoute) {
-    return { name: RouteName.PostList };
+    return { name: RouteName.Feed };
   }
 };
 

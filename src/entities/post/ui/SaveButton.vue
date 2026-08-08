@@ -1,20 +1,28 @@
 <script setup lang="ts">
 import { BookmarkIcon } from '@lucide/vue';
+import { computed } from 'vue';
 
 import { Button, type IButtonProps } from '~/shared/ui';
 
 import { usePostSaveComposable } from '../composables';
+import type { IPost } from '../model';
 
 import SaveButtonSkeleton from './SaveButtonSkeleton.vue';
 
 const props = withDefaults(
-  defineProps<{ postId: string; size?: IButtonProps['size'] }>(),
+  defineProps<{
+    post: IPost;
+    size?: IButtonProps['size'];
+    isPending?: boolean;
+  }>(),
   {
     size: 'icon',
   }
 );
 
-const { isPending, isSaved, handleSave } = usePostSaveComposable(props.postId);
+const currentPost = computed(() => props.post);
+
+const { isSaved, handleSave } = usePostSaveComposable(currentPost);
 </script>
 
 <template>

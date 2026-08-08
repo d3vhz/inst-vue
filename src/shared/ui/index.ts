@@ -25,7 +25,8 @@ export {
 } from './card';
 export {
   Carousel,
-  CarouselActions,
+  CarouselPrevNextButtons,
+  CarouselDotButtons,
   CarouselContent,
   CarouselItem,
   CarouselNext,

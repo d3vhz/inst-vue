@@ -11,8 +11,8 @@ interface Props extends PrimitiveProps {
 }
 
 withDefaults(defineProps<Props>(), {
-  variant: 'secondary',
-  size: 'icon-xs',
+  variant: 'primary',
+  size: 'icon-sm',
   class: '',
 });
 </script>

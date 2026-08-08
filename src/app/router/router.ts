@@ -11,36 +11,75 @@ import { authGuard } from './guards';
 
 const SignInPage = () => import('~/pages/auth/sign-in/ui/SignInPage.vue');
 const SignUpPage = () => import('~/pages/auth/sign-up/ui/SignUpPage.vue');
+const FeedPage = () => import('~/pages/feed/ui/FeedPage.vue');
+const ProfileShowPage = () =>
+  import('~/pages/profile/show/ui/ProfileShowPage.vue');
+const ProfileEditPage = () =>
+  import('~/pages/profile/edit/ui/ProfileEditPage.vue');
 const PostListPage = () => import('~/pages/post/list/ui/PostListPage.vue');
 const PostCreatePage = () =>
   import('~/pages/post/create/ui/PostCreatePage.vue');
 const PostShowPage = () => import('~/pages/post/show/ui/PostShowPage.vue');
 const PostEditPage = () => import('~/pages/post/edit/ui/PostEditPage.vue');
-const UserShowPage = () => import('~/pages/user/show/ui/UserShowPage.vue');
-const UserEditPage = () => import('~/pages/user/edit/ui/UserEditPage.vue');
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: { name: RouteName.PostList },
-  },
-  {
-    path: '/posts',
+    component: FeedPage,
+    name: RouteName.Feed,
     meta: {
       breadcrumb: {
-        label: 'Posts',
+        label: 'Feed',
+      },
+    },
+  },
+  {
+    path: '/profiles',
+    meta: {
+      breadcrumb: {
+        label: 'Profiles',
+        disabled: true,
       },
     },
     children: [
       {
         path: '',
-        name: RouteName.PostList,
-        component: PostListPage,
+        redirect: { name: RouteName.Search },
+      },
+      {
+        path: ':id',
+        name: RouteName.ProfileShow,
+        component: ProfileShowPage,
         meta: {
           breadcrumb: {
-            label: 'List',
+            label: (params: RouteParamsGeneric) => `${params.id}`,
           },
         },
+      },
+      {
+        path: ':id/edit',
+        name: RouteName.ProfileEdit,
+        component: ProfileEditPage,
+        meta: {
+          breadcrumb: {
+            label: (params: RouteParamsGeneric) => `${params.id}`,
+          },
+        },
+      },
+    ],
+  },
+  {
+    path: '/posts',
+    meta: {
+      breadcrumb: {
+        label: 'Search',
+      },
+    },
+    children: [
+      {
+        path: '',
+        name: RouteName.Search,
+        component: PostListPage,
       },
       {
         path: 'create',
@@ -48,7 +87,7 @@ const routes: RouteRecordRaw[] = [
         component: PostCreatePage,
         meta: {
           breadcrumb: {
-            label: 'Create',
+            label: 'Create Post',
           },
         },
       },
@@ -66,37 +105,6 @@ const routes: RouteRecordRaw[] = [
         path: ':id/edit',
         name: RouteName.PostEdit,
         component: PostEditPage,
-        meta: {
-          breadcrumb: {
-            label: (params: RouteParamsGeneric) => `${params.id}`,
-          },
-        },
-      },
-    ],
-  },
-  {
-    path: '/users',
-    meta: {
-      breadcrumb: {
-        label: 'Users',
-        disabled: true,
-      },
-    },
-    children: [
-      {
-        path: ':id',
-        name: RouteName.UserShow,
-        component: UserShowPage,
-        meta: {
-          breadcrumb: {
-            label: (params: RouteParamsGeneric) => `${params.id}`,
-          },
-        },
-      },
-      {
-        path: ':id/edit',
-        name: RouteName.UserEdit,
-        component: UserEditPage,
         meta: {
           breadcrumb: {
             label: (params: RouteParamsGeneric) => `${params.id}`,

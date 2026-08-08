@@ -9,9 +9,9 @@ const toastMessages = {
     update: 'The post has been updated successfully.',
     delete: 'The post has been deleted successfully.',
   },
-  user: {
-    update: 'The user has been updated successfully.',
-    delete: 'The user has been deleted successfully.',
+  profile: {
+    update: 'The profile has been updated successfully.',
+    delete: 'The profile has been deleted successfully.',
   },
 };
 

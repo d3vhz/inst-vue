@@ -25,7 +25,7 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 <template>
   <SelectComp v-model="modelValue" :disabled="props.disabled">
     <SelectTrigger
-      :clearable="String(modelValue)?.length > 0"
+      :clearable="clearable && String(modelValue)?.length > 0"
       @clear="emits('update:modelValue', '')"
     >
       <SelectValue :placeholder="props.placeholder" />

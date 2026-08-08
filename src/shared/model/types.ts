@@ -1,3 +1,4 @@
+import type { ComputedRef, Ref } from 'vue';
 import { z } from 'zod';
 
 import type {
@@ -19,7 +20,7 @@ type IRouteMeta = {
 type IBreadcrumb = {
   label: string;
   path: Nullable<IRouteName>;
-  disabled: boolean;
+  disabled?: boolean;
 };
 
 type IBlobUrl = z.infer<typeof BlobUrlSchema>;
@@ -30,6 +31,8 @@ type IFileItem = z.infer<typeof FileItemSchema>;
 
 type IImageItem = z.infer<typeof ImageItemSchema>;
 
+type MaybeRef<T> = T | Ref<T> | ComputedRef<T>;
+
 export type {
   Nullable,
   IBlobUrl,
@@ -39,4 +42,5 @@ export type {
   IRouteName,
   IRouteMeta,
   IBreadcrumb,
+  MaybeRef,
 };

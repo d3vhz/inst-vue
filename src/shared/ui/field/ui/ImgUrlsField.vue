@@ -12,9 +12,9 @@ import {
 } from '../../attachment';
 import {
   Carousel,
-  CarouselActions,
   CarouselContent,
   CarouselItem,
+  CarouselPrevNextButtons,
 } from '../../carousel';
 import { Image, ImageFallback, ImageRoot } from '../../image';
 import type { IFieldBaseProps } from '../model';
@@ -39,7 +39,7 @@ const onRemoveFile = (url: IUrl) => {
     :error-message="errorMessage"
   >
     <Carousel>
-      <CarouselContent class="-ml-1">
+      <CarouselContent class="space-y-4">
         <CarouselItem
           v-for="(url, index) in imgUrls"
           :key="url"
@@ -63,7 +63,7 @@ const onRemoveFile = (url: IUrl) => {
           </Attachment>
         </CarouselItem>
       </CarouselContent>
-      <CarouselActions />
+      <CarouselPrevNextButtons />
     </Carousel>
   </FieldWrap>
 </template>
